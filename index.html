@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surender Verma</title>
+<meta name="description" content="Personal website of Surender Verma">
+<style>
+:root{
+  --bg:#f6f7f4; --ink:#1b2420; --muted:#5b6a63; --line:#d9dfd9; --accent:#0f6b50; --card:#ffffff;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#101613; --ink:#e8efe9; --muted:#9aaba2; --line:#26322c; --accent:#4cc9a0; --card:#17201b;}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.7;font-size:18px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+nav{padding:24px 0;border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+nav strong{font-size:1.05rem}
+nav ul{list-style:none;display:flex;gap:22px;font-family:system-ui,sans-serif;font-size:.95rem}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--accent)}
+header{padding:96px 0 72px}
+h1{font-size:clamp(2.8rem,9vw,5.2rem);line-height:1.02;letter-spacing:-.02em;font-weight:700}
+header p{margin-top:24px;max-width:34em;font-size:1.25rem;color:var(--muted)}
+.btns{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;font-family:system-ui,sans-serif}
+.btn{padding:12px 22px;border-radius:6px;text-decoration:none;font-weight:600;border:2px solid var(--accent)}
+.btn.main{background:var(--accent);color:var(--bg)}
+.btn.alt{color:var(--accent)}
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font-size:1.7rem;margin-bottom:20px}
+.skills{display:flex;flex-wrap:wrap;gap:10px;list-style:none;font-family:system-ui,sans-serif;font-size:.95rem}
+.skills li{padding:6px 14px;border:1px solid var(--line);border-radius:99px;background:var(--card)}
+.projects{display:grid;gap:18px}
+.project{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px}
+.project h3{font-size:1.2rem;margin-bottom:6px}
+.project p{color:var(--muted);font-size:1rem}
+.project a{font-family:system-ui,sans-serif;font-size:.95rem}
+form{display:grid;gap:14px;font-family:system-ui,sans-serif}
+label{font-size:.95rem;font-weight:600}
+input,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit}
+button{justify-self:start;cursor:pointer;border:0}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-family:system-ui,sans-serif;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <strong>Surender Verma</strong>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<header>
+  <div class="wrap">
+    <h1>Hi, I’m Surender Verma.</h1>
+    <p>I build simple, useful things for the web. Based in Ludhiana, Punjab, India.</p>
+    <div class="btns">
+      <a class="btn main" href="#projects">See my work</a>
+      <a class="btn alt" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About me</h2>
+    <p>I’m Surender, and I enjoy turning ideas into working websites. Replace this paragraph with a few lines about your background, what you do, and what you’re learning right now.</p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <ul class="skills">
+      <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git &amp; GitHub</li><li>WordPress</li><li>Responsive design</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <div class="projects">
+      <article class="project">
+        <h3>Project one</h3>
+        <p>A short description of what this project does and what you used to build it.</p>
+        <a href="https://github.com/your-username/project-one">View on GitHub</a>
+      </article>
+      <article class="project">
+        <h3>Project two</h3>
+        <p>Another project. Add the problem it solves and the result.</p>
+        <a href="https://github.com/your-username/project-two">View on GitHub</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p style="margin-bottom:20px">Email me at <a href="mailto:you@example.com">you@example.com</a>, or send a message below.</p>
+    <form action="mailto:you@example.com" method="post" enctype="text/plain">
+      <div><label for="n">Your name</label><input id="n" name="name" required></div>
+      <div><label for="e">Your email</label><input id="e" name="email" type="email" required></div>
+      <div><label for="m">Message</label><textarea id="m" name="message" rows="5" required></textarea></div>
+      <button class="btn main" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="y">2026</span> Surender Verma. All rights reserved.</div>
+</footer>
+
+<script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+</body>
+</html>
