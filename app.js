@@ -106,6 +106,7 @@
 
     const closeDrawer = () => {
       drawer.classList.remove('open');
+      document.body.classList.remove('drawer-open');
       toggleBtn.setAttribute('aria-expanded', 'false');
       toggleBtn.textContent = '☰';
     };
@@ -113,6 +114,7 @@
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = drawer.classList.toggle('open');
+      document.body.classList.toggle('drawer-open', isOpen);
       toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       toggleBtn.textContent = isOpen ? '✕' : '☰';
     });

@@ -143,8 +143,8 @@
 
               <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px;">
                 <!-- WhatsApp Card -->
-                <a data-wa href="https://wa.me/919817242747" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 16px; background: var(--bg-surface-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; text-decoration: none; transition: border-color 0.2s ease;">
-                  <div style="width: 44px; height: 44px; border-radius: 12px; background: #25D366; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">💬</div>
+                <a data-wa href="https://wa.me/919817242747" target="_blank" rel="noopener noreferrer" class="direct-card">
+                  <div class="direct-icon direct-icon-wa">💬</div>
                   <div>
                     <h4 style="font-size: 1.05rem; margin-bottom: 2px; color: var(--text-main);">Chat on WhatsApp</h4>
                     <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0;">Instant direct message with Surender</p>
@@ -152,8 +152,8 @@
                 </a>
 
                 <!-- LinkedIn Card -->
-                <a data-c="linkedin" href="https://linkedin.com/in/Socialsurender" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 16px; background: var(--bg-surface-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; text-decoration: none; transition: border-color 0.2s ease;">
-                  <div style="width: 44px; height: 44px; border-radius: 12px; background: #0A66C2; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">in</div>
+                <a data-c="linkedin" href="https://linkedin.com/in/Socialsurender" target="_blank" rel="noopener noreferrer" class="direct-card">
+                  <div class="direct-icon direct-icon-in">in</div>
                   <div>
                     <h4 style="font-size: 1.05rem; margin-bottom: 2px; color: var(--text-main);">Connect on LinkedIn</h4>
                     <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0;">@Socialsurender • 11,700+ Followers</p>
@@ -161,8 +161,8 @@
                 </a>
 
                 <!-- Instagram Card -->
-                <a data-c="instagram" href="https://instagram.com/social_surender" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 16px; background: var(--bg-surface-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; text-decoration: none; transition: border-color 0.2s ease;">
-                  <div style="width: 44px; height: 44px; border-radius: 12px; background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">📸</div>
+                <a data-c="instagram" href="https://instagram.com/social_surender" target="_blank" rel="noopener noreferrer" class="direct-card">
+                  <div class="direct-icon direct-icon-ig">📸</div>
                   <div>
                     <h4 style="font-size: 1.05rem; margin-bottom: 2px; color: var(--text-main);">Follow on Instagram</h4>
                     <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0;">@social_surender • Daily insights</p>
@@ -170,11 +170,11 @@
                 </a>
 
                 <!-- Email Card -->
-                <a data-c="email" href="mailto:Bizsocialsurender@gmail.com" style="display: flex; align-items: center; gap: 16px; background: var(--bg-surface-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 20px; text-decoration: none; transition: border-color 0.2s ease;">
-                  <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">✉️</div>
-                  <div>
+                <a data-c="email" href="mailto:Bizsocialsurender@gmail.com" class="direct-card">
+                  <div class="direct-icon direct-icon-email">✉️</div>
+                  <div style="min-width: 0;">
                     <h4 style="font-size: 1.05rem; margin-bottom: 2px; color: var(--text-main);">Send an Email</h4>
-                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0;"><span data-c="email">Bizsocialsurender@gmail.com</span></p>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0; word-break: break-all;"><span data-c="email">Bizsocialsurender@gmail.com</span></p>
                   </div>
                 </a>
               </div>
@@ -191,7 +191,7 @@
             </div>
 
             <!-- Right: Short Form -->
-            <div class="contact-form-box" style="background: var(--bg-page); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 32px 28px;">
+            <div class="contact-form-box">
               <h3 style="font-size: 1.4rem; margin-bottom: 6px;">Send a Direct Note</h3>
               <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 24px;">
                 Fill out the short form below and I will respond within 24 hours.
@@ -201,17 +201,17 @@
                 
                 <div style="margin-bottom: 18px;">
                   <label for="nameInput" style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px;">Your Name *</label>
-                  <input type="text" id="nameInput" name="name" autocomplete="name" required placeholder="e.g. Rahul Sharma" style="width: 100%; padding: 12px 14px; font-family: var(--font-family); font-size: 0.96rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background: #FFFFFF; color: var(--text-main); outline: none;">
+                  <input type="text" id="nameInput" name="name" autocomplete="name" required placeholder="e.g. Rahul Sharma" style="width: 100%; padding: 12px 14px; font-family: var(--font-family); font-size: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none;">
                 </div>
 
                 <div style="margin-bottom: 18px;">
                   <label for="contactInput" style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px;">Email or WhatsApp Number *</label>
-                  <input type="text" id="contactInput" name="contact" autocomplete="email tel" required placeholder="e.g. rahul@example.com or +91 98..." style="width: 100%; padding: 12px 14px; font-family: var(--font-family); font-size: 0.96rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background: #FFFFFF; color: var(--text-main); outline: none;">
+                  <input type="text" id="contactInput" name="contact" autocomplete="email tel" required placeholder="e.g. rahul@example.com or +91 98..." style="width: 100%; padding: 12px 14px; font-family: var(--font-family); font-size: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none;">
                 </div>
 
                 <div style="margin-bottom: 18px;">
                   <label for="interestSelect" style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px;">How can I help you?</label>
-                  <select id="interestSelect" name="interest" style="width: 100%; padding: 12px 14px; font-family: var(--font-family); font-size: 0.96rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background: #FFFFFF; color: var(--text-main); outline: none;">
+                  <select id="interestSelect" name="interest" style="width: 100%; padding: 12px 14px; font-family: var(--font-family); font-size: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none;">
                     <option value="career">Career Coaching &amp; Mentorship</option>
                     <option value="branding">Personal Branding on LinkedIn</option>
                     <option value="business">Business Growth with Growth Karo</option>
@@ -222,7 +222,7 @@
 
                 <div style="margin-bottom: 24px;">
                   <label for="messageInput" style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px;">Brief Message or Query *</label>
-                  <textarea id="messageInput" name="message" rows="4" required placeholder="Tell me a bit about your current goals or situation..." style="width: 100%; padding: 12px 14px; font-family: var(--font-family); font-size: 0.96rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background: #FFFFFF; color: var(--text-main); outline: none; resize: vertical;"></textarea>
+                  <textarea id="messageInput" name="message" rows="4" required placeholder="Tell me a bit about your current goals or situation..." style="width: 100%; padding: 12px 14px; font-family: var(--font-family); font-size: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none; resize: vertical;"></textarea>
                 </div>
 
                 <button type="submit" class="btn-primary" style="width: 100%;">
