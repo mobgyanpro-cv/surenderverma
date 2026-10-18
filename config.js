@@ -5,7 +5,7 @@
 const SITE = {
   // Personal Brand Name
   name: 'Surender Verma',
-  brand: 'Surender<b>.</b>Verma',
+  brand: 'Surender <span>Verma</span>',
 
   // Core Roles
   title: 'Founder & CEO at Growth Karo • Cyber Security Consultant • Career Coach',

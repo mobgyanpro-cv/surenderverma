@@ -15,7 +15,7 @@
     if (typeof SITE === 'undefined') return;
 
     // Brand and Name
-    $$('[data-site="brand"]').forEach(el => { el.innerHTML = SITE.brand || 'Surender<b>.</b>Verma'; });
+    $$('[data-site="brand"]').forEach(el => { el.innerHTML = SITE.brand || 'Surender <span>Verma</span>'; });
     $$('[data-site="name"]').forEach(el => { el.textContent = SITE.name || 'Surender Verma'; });
     $$('[data-site="location"]').forEach(el => { el.textContent = SITE.location || 'Sirsa, Haryana, India'; });
     $$('[data-site="tagline"]').forEach(el => { el.textContent = SITE.tagline || ''; });
@@ -92,6 +92,15 @@
         toggleBtn.textContent = '☰';
       });
     });
+
+    // Close when clicking outside drawer
+    document.addEventListener('click', (e) => {
+      if (drawer.classList.contains('open') && !drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+        drawer.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.textContent = '☰';
+      }
+    });
   }
 
   // 3. Header Scroll Glass Effect
@@ -160,6 +169,40 @@
     });
   }
 
+  // 7. Contact Form Direct WhatsApp Integration & Topic Pre-selection
+  function setupContactForm() {
+    const form = $('#contactForm');
+    const select = $('#interestSelect');
+
+    // Auto-select dropdown from URL query parameters (e.g. ?interest=career)
+    if (select) {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const interest = urlParams.get('interest');
+        if (interest) {
+          const opt = select.querySelector(`option[value="${interest}"]`);
+          if (opt) select.value = interest;
+        }
+      } catch (e) {}
+    }
+
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = $('#nameInput') ? $('#nameInput').value.trim() : '';
+      const contact = $('#contactInput') ? $('#contactInput').value.trim() : '';
+      const topic = select && select.selectedIndex >= 0 ? select.options[select.selectedIndex].text : '';
+      const message = $('#messageInput') ? $('#messageInput').value.trim() : '';
+
+      const text = `Hi Surender,\n\nName: ${name}\nContact: ${contact}\nTopic: ${topic}\nMessage: ${message}`;
+      const waNumber = (typeof SITE !== 'undefined' && SITE.whatsapp) ? SITE.whatsapp : '919817242747';
+      const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+      
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    });
+  }
+
   // Initialize all modules when DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
     hydrateSiteData();
@@ -168,5 +211,6 @@
     setupScrollReveal();
     setupImageFallbacks();
     highlightCurrentPage();
+    setupContactForm();
   });
 })();
