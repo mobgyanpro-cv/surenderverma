@@ -1,9 +1,21 @@
+/* Shared behaviour. Header = header.html, footer = footer.html, details = config.js */
 const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)],P=document.body.dataset.p;
-const C={email:"indiamaksolutions@gmail.com",wa:"919595958383"};
-const pages=[["index","Home"],["services","Services"],["work","Work"],["about","About"],["contact","Contact"]];
-const on=k=>k==P?"on":"";
-document.body.insertAdjacentHTML("afterbegin",`<div id="pb"></div><header><div class="w"><a class="lg" href="index.html">Surender<b>.</b>Verma</a><button id="bg" aria-label="Menu">Menu</button><nav><a href="index.html" class="${on("index")}">Home</a><div class="dd"><a href="services.html" class="${on("services")}">Services ▾</a><div class="dm"><a href="services.html#websites">Premium websites</a><a href="services.html#apps">Business apps</a><a href="services.html#crm">Custom CRM</a><a href="services.html#ext">Chrome extensions</a></div></div><a href="work.html" class="${on("work")}">Work</a><a href="about.html" class="${on("about")}">About</a><a href="contact.html" class="btn m">Book a meeting</a></nav></div></header>`);
-document.body.insertAdjacentHTML("beforeend",`<footer><div class="w"><div><a class="lg" href="index.html">Surender<b>.</b>Verma</a><p>Websites, apps and CRM systems<br>by M.A.K Solutions.</p></div><div><h4>Services</h4><a href="services.html#websites">Premium websites</a><a href="services.html#apps">Business apps</a><a href="services.html#crm">Custom CRM</a><a href="services.html#ext">Chrome extensions</a></div><div><h4>Company</h4><a href="about.html">About</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div><div><h4>Get in touch</h4><a href="mailto:${C.email}">${C.email}</a><a href="https://wa.me/${C.wa}">WhatsApp +91 95959 58383</a><a href="https://indiamaksolutions.com">indiamaksolutions.com</a><p>© ${new Date().getFullYear()} Surender Verma</p></div></div></footer>`);
+const C={email:SITE.email,wa:SITE.whatsapp};
+async function part(file,pos){let h;
+  try{const r=await fetch(file);if(!r.ok)throw 0;h=await r.text()}
+  catch{h=pos=="afterbegin"?'<header><div class="w"><a class="lg" href="index.html">Home</a><nav><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>':'<footer><div class="w"><p>© Surender Verma</p></div></footer>'}
+  document.body.insertAdjacentHTML(pos,h.replace(/\{\{(\w+)\}\}/g,(m,k)=>SITE[k]??""))}
+(async()=>{
+document.body.insertAdjacentHTML("afterbegin",'<div id="pb"></div>');
+await Promise.all([part("header.html","afterbegin"),part("footer.html","beforeend")]);
+$$("nav [data-p]").forEach(a=>a.classList.toggle("on",a.dataset.p==P));
+const wa="https://wa.me/"+SITE.whatsapp;
+$$("[data-wa]").forEach(a=>a.href=wa);
+$$("[data-c]").forEach(a=>{const k=a.dataset.c;
+  if(k=="email"){a.href="mailto:"+SITE.email;a.textContent=SITE.email}
+  if(k=="phone"){a.href="tel:"+SITE.phone;a.textContent="Call "+SITE.phoneText}
+  if(k=="wa"){a.href=wa;a.textContent="WhatsApp "+SITE.phoneText}
+  if(k=="site"){a.href=SITE.website;a.textContent=SITE.website.replace("https://","")}});
 $("#bg").onclick=()=>$("nav").classList.toggle("open");
 addEventListener("scroll",()=>{const h=document.documentElement;$("#pb").style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%"},{passive:1});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
@@ -18,3 +30,5 @@ const cv=$("#c");if(cv&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
 
 const rt=$("#rot");if(rt){const q=["launch a website that converts?","track every lead and follow-up?","automate billing and bookings?","cut repetitive browser work?","look premium on every phone?","turn visitors into enquiries?"];let i=0;setInterval(()=>{rt.classList.add("out");setTimeout(()=>{i=(i+1)%q.length;rt.textContent=q[i];rt.classList.remove("out")},400)},2800)}
 const vd=$(".vid button");if(vd)vd.onclick=()=>{const v=vd.parentNode;v.classList.toggle("on");vd.textContent=v.classList.contains("on")?"Pause":"Play preview"};
+
+})();

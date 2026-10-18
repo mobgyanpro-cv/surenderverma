@@ -1,0 +1,16 @@
+WHICH FILE TO EDIT
+config.js     -> your name, email, phone, WhatsApp, website (updates every page)
+header.html   -> top menu (add or remove menu links here)
+footer.html   -> footer columns and links
+index.html    -> Home page text
+services.html -> Services page text and prices
+work.html     -> Projects list
+about.html    -> About text and timeline
+contact.html  -> Contact page text and form
+style.css     -> colours, fonts, spacing (colours are at the very top of the file)
+app.js        -> animations and behaviour (usually no need to touch)
+
+TIPS
+- Keep all files in the same folder.
+- header.html and footer.html load through the browser, so test on your Vercel link
+  (or a local server), not by double-clicking the file.
