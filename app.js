@@ -185,9 +185,9 @@
       { title: 'Capabilities & Showcase', desc: 'Detailed view of services and practical execution', url: 'work.html', icon: '💼' },
       { title: 'About Surender Verma', desc: 'Background, skills proficiency & journey', url: 'about.html', icon: '👤' },
       { title: 'Contact & Inquiry Form', desc: 'Get in touch for projects or consulting', url: 'contact.html', icon: '✉️' },
-      { title: 'Chat on WhatsApp', desc: 'Instant chat at +91 95959 58383', url: wa, icon: '💬', external: true },
+      { title: 'Chat on WhatsApp', desc: 'Instant chat at +91 98172 42747', url: wa, icon: '💬', external: true },
       { title: 'Send Direct Email', desc: 'Email contact@surenderverma.com', url: email, icon: '📧', external: true },
-      { title: 'Call on Phone', desc: 'Call +91 95959 58383', url: tel, icon: '📞', external: true }
+      { title: 'Call on Phone', desc: 'Call +91 98172 42747', url: tel, icon: '📞', external: true }
     ];
 
     let currentItems = searchCatalog;
@@ -536,9 +536,9 @@
 
     const phrases = [
       'measurable business growth.',
-      'faster, high-converting websites.',
-      'automated lead workflows.',
-      'practical digital systems.'
+      'fighting network marketing scams.',
+      'empowering Fraud Free Bharat.',
+      'scaling businesses via Growtheasily.'
     ];
     let idx = 0;
 
