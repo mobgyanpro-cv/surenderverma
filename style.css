@@ -87,3 +87,30 @@ nav>a:hover,.dd>a:hover{color:var(--ink);background:var(--alt)}nav a.on{color:va
 #cpl{list-style:none;max-height:300px;overflow:auto;padding:8px}#cpl a{display:block;padding:10px 14px;border-radius:10px;text-decoration:none;color:var(--ink)}#cpl a.sel{background:var(--hi);color:#fff}
 .cpb p{padding:10px 20px;font-size:.78rem;color:var(--mut);border-top:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){#hd,.ann,nav{transition:none}}
+
+/* --- Mobile Responsive & Header Icons Fixes --- */
+@media(max-width: 576px) {
+  .w { padding: 0 16px; }
+  .bar { height: 60px !important; gap: 8px; }
+  .lg { font-size: 1.05rem; }
+  .act { gap: 6px; }
+  .ib { height: 36px; min-width: 36px; padding: 0 8px; font-size: 0.8rem; }
+  .hero { padding: 110px 0 40px; min-height: auto; }
+  .hero.l { padding: 110px 0 40px; }
+  h1 { font-size: 2.2rem !important; }
+  h2 { font-size: 1.6rem !important; }
+  .lead { font-size: 1rem !important; margin: 16px 0; }
+  .sec { padding: 60px 0; }
+  .cta { padding: 40px 16px; border-radius: 16px; }
+  .cols { gap: 24px; }
+  .panel { padding: 20px; }
+  .st b { font-size: 2rem !important; }
+  .kp { gap: 20px; }
+  .fl { gap: 6px; margin-top: 18px; }
+  .fl button { padding: 6px 14px; font-size: 0.85rem; }
+}
+
+@media(max-width: 380px) {
+  .ib:not(#bg):not(#th) { display: none; }
+  #bg { display: inline-flex !important; }
+}
