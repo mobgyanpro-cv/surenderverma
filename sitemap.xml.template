@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Replace https://YOUR-DOMAIN.example with the real canonical HTTPS domain before renaming this file to sitemap.xml. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://YOUR-DOMAIN.example/</loc></url>
-  <url><loc>https://YOUR-DOMAIN.example/services.html</loc></url>
-  <url><loc>https://YOUR-DOMAIN.example/work.html</loc></url>
-  <url><loc>https://YOUR-DOMAIN.example/about.html</loc></url>
-  <url><loc>https://YOUR-DOMAIN.example/contact.html</loc></url>
-</urlset>
