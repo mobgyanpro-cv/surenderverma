@@ -30,37 +30,63 @@
       el.rel = 'noopener noreferrer';
     });
 
-    // Contact bindings
+    // Contact bindings (Preserves inner HTML for cards that contain child elements)
     $$('[data-c]').forEach(el => {
       const type = el.dataset.c;
+      const isAnchor = el.tagName.toLowerCase() === 'a';
+
       if (type === 'email' && SITE.email) {
-        el.href = `mailto:${SITE.email}`;
-        el.textContent = SITE.email;
+        if (isAnchor) {
+          el.href = `mailto:${SITE.email}`;
+          if (el.children.length === 0) {
+            el.textContent = SITE.email;
+          }
+        } else {
+          el.textContent = SITE.email;
+        }
       } else if (type === 'phone' && (SITE.phone || SITE.phoneText)) {
-        el.href = `tel:${SITE.phone || SITE.phoneText}`;
-        el.textContent = SITE.phoneText || SITE.phone;
+        if (isAnchor) {
+          el.href = `tel:${SITE.phone || SITE.phoneText}`;
+          if (el.children.length === 0) {
+            el.textContent = SITE.phoneText || SITE.phone;
+          }
+        } else {
+          el.textContent = SITE.phoneText || SITE.phone;
+        }
       } else if (type === 'linkedin' && SITE.linkedin) {
-        el.href = SITE.linkedin;
-        el.target = '_blank';
-        el.rel = 'noopener noreferrer';
+        if (isAnchor) {
+          el.href = SITE.linkedin;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+        }
       } else if (type === 'instagram' && SITE.instagram) {
-        el.href = SITE.instagram;
-        el.target = '_blank';
-        el.rel = 'noopener noreferrer';
+        if (isAnchor) {
+          el.href = SITE.instagram;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+        }
       } else if (type === 'growthKaro' && SITE.growthKaro) {
-        el.href = SITE.growthKaro;
-        el.target = '_blank';
-        el.rel = 'noopener noreferrer';
+        if (isAnchor) {
+          el.href = SITE.growthKaro;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+        }
       } else if (type === 'year') {
         el.textContent = SITE.year || new Date().getFullYear();
       }
     });
 
-    // Credibility Stats
+    // Credibility Stats (Update all matching elements across entire page)
     if (SITE.stats) {
-      if ($('[data-stat="followers"]')) $('[data-stat="followers"]').textContent = SITE.stats.followers || '11,700+';
-      if ($('[data-stat="connections"]')) $('[data-stat="connections"]').textContent = SITE.stats.connections || '500+';
-      if ($('[data-stat="stories"]')) $('[data-stat="stories"]').textContent = SITE.stats.stories || '100+';
+      if (SITE.stats.followers) {
+        $$('[data-stat="followers"]').forEach(el => { el.textContent = SITE.stats.followers; });
+      }
+      if (SITE.stats.connections) {
+        $$('[data-stat="connections"]').forEach(el => { el.textContent = SITE.stats.connections; });
+      }
+      if (SITE.stats.stories) {
+        $$('[data-stat="stories"]').forEach(el => { el.textContent = SITE.stats.stories; });
+      }
     }
 
     // CTA links
@@ -72,33 +98,41 @@
     });
   }
 
-  // 2. Mobile Navigation Toggle
+  // 2. Mobile Navigation Toggle & Drawer
   function setupMobileNav() {
     const toggleBtn = $('#mobileNavToggle');
     const drawer = $('#mobileNavDrawer');
     if (!toggleBtn || !drawer) return;
 
-    toggleBtn.addEventListener('click', () => {
+    const closeDrawer = () => {
+      drawer.classList.remove('open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.textContent = '☰';
+    };
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isOpen = drawer.classList.toggle('open');
       toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       toggleBtn.textContent = isOpen ? '✕' : '☰';
     });
 
-    // Close when clicking a link inside mobile drawer
-    $$('.mobile-nav-link', drawer).forEach(link => {
-      link.addEventListener('click', () => {
-        drawer.classList.remove('open');
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        toggleBtn.textContent = '☰';
-      });
+    // Close when clicking ANY link or button inside mobile drawer
+    $$('a', drawer).forEach(link => {
+      link.addEventListener('click', closeDrawer);
     });
 
     // Close when clicking outside drawer
     document.addEventListener('click', (e) => {
       if (drawer.classList.contains('open') && !drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
-        drawer.classList.remove('open');
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        toggleBtn.textContent = '☰';
+        closeDrawer();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeDrawer();
       }
     });
   }
@@ -148,21 +182,37 @@
 
   // 5. Image Fallback Handling
   function setupImageFallbacks() {
-    $$('img').forEach(img => {
-      img.addEventListener('error', () => {
-        if (img.classList.contains('hero-portrait-img')) {
+    $$('img.hero-portrait-img').forEach(img => {
+      const handleFallback = () => {
+        if (!img.src.includes('surender-placeholder.svg')) {
           img.src = 'images/surender-placeholder.svg';
         }
-      });
+      };
+      img.addEventListener('error', handleFallback);
+      if (img.complete && img.naturalWidth === 0) {
+        handleFallback();
+      }
     });
   }
 
-  // 6. Highlight Active Navigation Item
+  // 6. Highlight Active Navigation Item (Robust URL normalization)
   function highlightCurrentPage() {
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    $$('.nav-link, .mobile-nav-link').forEach(link => {
-      const href = link.getAttribute('href');
-      if (href === currentPath || (currentPath === '' && href === 'index.html')) {
+    let currentPath = window.location.pathname.split('/').pop().toLowerCase();
+    
+    // Normalize index and clean URLs
+    if (!currentPath || currentPath === '' || currentPath === 'index') {
+      currentPath = 'index.html';
+    } else if (!currentPath.includes('.')) {
+      currentPath = currentPath + '.html';
+    }
+
+    const allLinks = $$('.nav-link, .mobile-nav-link');
+    allLinks.forEach(link => {
+      link.classList.remove('active');
+      link.removeAttribute('aria-current');
+      
+      const href = (link.getAttribute('href') || '').toLowerCase().split('?')[0].split('#')[0];
+      if (href === currentPath) {
         link.classList.add('active');
         link.setAttribute('aria-current', 'page');
       }
@@ -173,6 +223,7 @@
   function setupContactForm() {
     const form = $('#contactForm');
     const select = $('#interestSelect');
+    const statusDiv = $('#formStatus');
 
     // Auto-select dropdown from URL query parameters (e.g. ?interest=career)
     if (select) {
@@ -199,7 +250,21 @@
       const waNumber = (typeof SITE !== 'undefined' && SITE.whatsapp) ? SITE.whatsapp : '919817242747';
       const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
       
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      // Provide instant user feedback
+      if (statusDiv) {
+        statusDiv.style.display = 'block';
+        statusDiv.style.backgroundColor = 'var(--color-primary-light, #EEF2FF)';
+        statusDiv.style.border = '1px solid var(--border-color, #E3E9F4)';
+        statusDiv.style.color = 'var(--text-main, #0B1B3A)';
+        statusDiv.innerHTML = `Opening WhatsApp to send your message...<br><a href="${waUrl}" target="_blank" rel="noopener noreferrer" style="font-weight: 600; text-decoration: underline; color: var(--color-primary, #2F5BFF);">Click here if WhatsApp didn't open automatically →</a>`;
+      }
+
+      // Try opening WhatsApp in new tab
+      const win = window.open(waUrl, '_blank', 'noopener,noreferrer');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        // Pop-up blocked, redirect in current window
+        window.location.href = waUrl;
+      }
     });
   }
 

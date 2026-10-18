@@ -12,19 +12,24 @@ A clean, calm, and trustworthy personal brand website for **Surender Verma** (Si
 - **Single Primary Button Style**: `.btn-primary` with `#2F5BFF`.
 - **Centralized Config**: Contact details, WhatsApp, LinkedIn, email, and location live only in `config.js`.
 
-## Site Structure (5 Pages)
+## Site Structure
 ```text
-├── index.html        # Home (Hero with portrait slot, credibility strip, how I can help, short bio, Growth Karo, Fraud Buster, testimonials, final CTA)
-├── about.html        # About Surender (Bio, Sirsa roots, timeline, IGNOU education, values, civil causes volunteering)
+├── index.html        # Home (Hero with portrait, credibility strip, expertise cards, bio, Growth Karo, Fraud Buster, testimonials, final CTA)
+├── about.html        # About Surender (Bio, Sirsa roots, timeline milestones, IGNOU education, core values, civil volunteering)
 ├── services.html     # Work With Me (Career coaching, personal branding, Growth Karo, cyber defense, 3-step process, FAQ)
 ├── awareness.html    # Fraud Awareness & Safety Guide (Common scams, warning signs, emergency action plan, official 1930 / cybercrime.gov.in details)
-├── contact.html      # Contact (Direct WhatsApp, LinkedIn, email, Sirsa location, short form)
-├── style.css         # Complete design system tokens, typography, and responsive styles
-├── app.js            # Lightweight vanilla JS for hydration, mobile nav, scroll header, and image fallback
+├── contact.html      # Contact (Direct WhatsApp, LinkedIn, Instagram, email cards, responsive 2-column layout, inquiry form)
+├── work.html         # Canonical redirect to services.html
+├── style.css         # Complete design system tokens, responsive utilities, WCAG-compliant contrasts
+├── app.js            # Lightweight vanilla JS for hydration, active nav, mobile drawer, scroll header, and image fallback
 ├── config.js         # Centralized personal brand configuration
 ├── header.html       # Source header partial
 ├── footer.html       # Source footer partial
-├── images/           # Contains surender.jpg and surender-placeholder.svg
+├── images/
+│   ├── surender.jpg              # Executive portrait image (replaceable with user photo)
+│   ├── surender-placeholder.svg  # Elegant vector fallback avatar (zero developer text)
+│   ├── og-image.png              # High-res 1200x630 social share preview card (WhatsApp, LinkedIn, Twitter)
+│   └── apple-touch-icon.png      # 180x180 Apple Touch Icon for iOS home screens
 ├── sitemap.xml       # Canonical XML sitemap
 ├── robots.txt        # Web crawler configuration
 └── HOW-TO-EDIT.txt   # Step-by-step editing and hosting guide

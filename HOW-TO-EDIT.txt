@@ -13,8 +13,9 @@
                     business consulting, Cyber Security advisory, 3-step process, FAQs.
 - awareness.html -> Fraud Awareness & Cyber Safety Guide: Common scams, warning
                     signs, emergency action plan, and official 1930 / cybercrime.gov.in details.
-- contact.html   -> Direct contact page: short inquiry form, WhatsApp link,
-                    LinkedIn button, email, and Sirsa, Haryana location.
+- contact.html   -> Direct contact page: responsive 2-column layout, WhatsApp,
+                    LinkedIn, Instagram, email cards, and WhatsApp-integrated inquiry form.
+- work.html      -> Instant redirect to services.html.
 
 2. HOW TO UPDATE YOUR DETAILS
 --------------------------------------------------------------------------------
@@ -27,21 +28,21 @@ Open "config.js" to edit:
   - linkedin    : https://linkedin.com/in/Socialsurender (@Socialsurender)
   - instagram   : https://instagram.com/social_surender (@social_surender)
   - growthKaro  : https://growthkaro.com
+  - stats       : Followers (11,700+), Connections (500+), Stories (100+)
 
-3. HOW TO ADD YOUR PORTRAIT PHOTO
+3. HOW TO ADD OR REPLACE YOUR PORTRAIT PHOTO
 --------------------------------------------------------------------------------
-1. Place your photo inside the "images" folder.
-2. Name the file: "surender.jpg"
+1. Place your real photo inside the "images" folder.
+2. Name the file: "surender.jpg" (recommended aspect ratio 4:5 or 840x1008px).
 3. The website will immediately load your picture in the hero section!
-   (If the photo is missing or has a different name, a clean SVG placeholder
-   displays automatically without broken image icons).
+   (An executive default and vector placeholder "surender-placeholder.svg" are
+   already included and will automatically display if your photo is ever moved).
 
-4. HOW TO CUSTOMIZE PLACEHOLDERS IN HTML FILES
+4. SOCIAL SHARING (OPEN GRAPH & TWITTER)
 --------------------------------------------------------------------------------
-Every customizable block has an HTML comment starting with <!-- PLACEHOLDER: ... -->
-- In index.html: Testimonial names and feedback in the dark section.
-- In about.html: Confirming your exact degree at IGNOU.
-- In awareness.html: Verification of local cybercrime reporting details.
+- images/og-image.png (1200x630) is pre-configured across all pages so your link
+  previews look gorgeous on WhatsApp, LinkedIn, X/Twitter, and Facebook.
+- images/apple-touch-icon.png (180x180) is provided for iPhone and iPad home screens.
 
 5. HOW TO UPLOAD TO WEB HOSTING
 --------------------------------------------------------------------------------
