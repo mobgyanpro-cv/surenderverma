@@ -19,12 +19,8 @@ async function loadPartial(file, position) {
 }
 
 function setupContactLinks() {
-  const whatsappUrl = `https://wa.me/${SITE.whatsapp}`;
-  $$("[data-wa]").forEach((link) => {
-    link.href = whatsappUrl;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-  });
+  const whatsappUrl = SITE.whatsapp ? `https://wa.me/${SITE.whatsapp}` : "";
+  $$ ("[data-wa]").forEach((link) => { if (!whatsappUrl) { link.hidden = true; return; } link.href = whatsappUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; });
   $$("[data-c]").forEach((link) => {
     const type = link.dataset.c;
     if (type === "email") {
@@ -111,14 +107,14 @@ function setupHeader() {
 function setupSearch() {
   const searchButton = $("#srch"), panel = $("#cp"), input = $("#cpi"), list = $("#cpl");
   if (!searchButton || !panel || !input || !list) return;
-  const whatsappUrl = `https://wa.me/${SITE.whatsapp}`;
+  const whatsappUrl = SITE.whatsapp ? `https://wa.me/${SITE.whatsapp}` : "";
   const items = [
     ["Home", "index.html"], ["Websites & landing pages", "services.html#websites"],
     ["Digital marketing & lead generation", "services.html#marketing"],
     ["Automation & AI workflows", "services.html#automation"],
     ["Digital safety & fraud awareness", "services.html#security"],
     ["Capabilities", "work.html"], ["About Surender", "about.html"],
-    ["Contact", "contact.html"], ["WhatsApp", whatsappUrl], ["Email", `mailto:${SITE.email}`]
+    ["Contact", "contact.html"]
   ];
   let filtered = items, selected = 0;
   const draw = () => {
@@ -251,10 +247,16 @@ function setupContactForm() {
       "Project details:",
       data.get("m")
     ].join("\n");
-    const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const status = $("#ok");
-    if (status) status.textContent = "Opening your email application with the enquiry prepared…";
-    window.location.href = mailto;
+    if (SITE.email) {
+      const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (status) status.textContent = "Opening your email application with the enquiry prepared…";
+      window.location.href = mailto;
+    } else {
+      const text = `${subject}\n\n${body}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => { if (status) status.textContent = "Message copied. Add your preferred personal email in config.js to enable email sending."; }).catch(() => { if (status) status.textContent = text; });
+      else if (status) status.textContent = text;
+    }
   });
 }
 
