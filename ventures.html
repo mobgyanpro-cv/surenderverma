@@ -27,6 +27,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- Theme Init Script (Zero Flash) -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('sv-theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
   <link rel="stylesheet" href="style.css">
 
   <!-- Structured Data: Person -->
@@ -48,11 +58,48 @@
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- ═══════════════════════════════════════════════════
-       HEADER (loaded from header.html via app.js)
-  ═══════════════════════════════════════════════════ -->
-  <div id="header-placeholder"></div>
+  <!-- =======================================================================
+       HEADER
+       ======================================================================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="site-logo" aria-label="Surender Verma Homepage" data-site="brand">
+        Surender <span>Verma</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="ventures.html" class="nav-link active" aria-current="page">My Ventures</a>
+        <a href="services.html" class="nav-link">Work With Me</a>
+        <a href="awareness.html" class="nav-link">Fraud Awareness</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Switch theme">
+          🌙
+        </button>
+        <a href="contact.html" class="btn-primary" data-cta-link>Book a call</a>
+        <button id="mobileNavToggle" class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileNavDrawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+      <a href="ventures.html" class="mobile-nav-link active">My Ventures</a>
+      <a href="services.html" class="mobile-nav-link">Work With Me</a>
+      <a href="awareness.html" class="mobile-nav-link">Fraud Awareness</a>
+      <a href="contact.html" class="mobile-nav-link">Contact</a>
+      <a href="contact.html" class="btn-primary" style="margin-top: 10px;" data-cta-link>Book a call</a>
+    </div>
+  </header>
 
   <main id="main-content">
 
@@ -86,8 +133,8 @@
             </div>
             <div>
               <div class="venture-badge" style="background: var(--color-primary-light); color: var(--color-primary);">Venture 1 · Digital Growth Agency</div>
-              <h2 id="gk-heading" class="venture-name">Growth Karo</h2>
-              <p class="venture-tagline">Helping businesses and creators grow with strategy, branding and digital tools.</p>
+              <h2 id="gk-heading" class="venture-name">Growth Karo / Growtheasily</h2>
+              <p class="venture-tagline">Helping businesses and creators scale sustainably with strategic branding, modern web solutions and digital marketing.</p>
             </div>
           </div>
 
@@ -95,15 +142,15 @@
             <div class="venture-about">
               <h3>What We Do</h3>
               <p>
-                Growth Karo is a digital growth studio I founded to help small businesses, 
-                personal brands, and content creators build a powerful online presence. 
-                We combine brand strategy, social media marketing, LinkedIn growth, 
-                and digital consulting to turn your online presence into a growth engine.
+                <strong>Growth Karo (Growtheasily)</strong> is a digital growth and consulting agency I founded to help small businesses, 
+                personal brands, and content creators build an authoritative online presence. 
+                We combine brand strategy, social media acceleration, LinkedIn authority building, 
+                and conversion-driven web solutions to turn your brand into a growth engine.
               </p>
               <p style="margin-top: 1rem;">
                 Whether you are a startup trying to get your first 1,000 customers, 
-                a professional wanting to build your authority on LinkedIn, or a business 
-                looking to scale — Growth Karo is built for you.
+                a professional wanting to build authority on LinkedIn, or an established business 
+                looking to scale without tech friction — Growth Karo / Growtheasily delivers hands-on results.
               </p>
 
               <h3 style="margin-top: 2rem;">Who It's For</h3>
@@ -453,10 +500,74 @@
 
   </main>
 
-  <!-- ═══════════════════════════════════════════════════
-       FOOTER (loaded from footer.html via app.js)
-  ═══════════════════════════════════════════════════ -->
-  <div id="footer-placeholder"></div>
+  <!-- =======================================================================
+       FOOTER
+       ======================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand & Bio -->
+        <div class="footer-col-brand">
+          <a href="index.html" class="site-logo" data-site="brand">
+            Surender <span>Verma</span>
+          </a>
+          <p>Founder &amp; CEO at Growth Karo, Cyber Security Consultant, AI &amp; Career Coach, and Fraud Buster helping individuals and businesses grow safely.</p>
+          <p style="margin-top: 10px; font-size: 0.88rem; color: var(--text-light);">
+            📍 <span data-site="location">Sirsa, Haryana, India</span>
+          </p>
+        </div>
+
+        <!-- Col 2: Navigation -->
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Surender</a></li>
+            <li><a href="ventures.html">My Ventures</a></li>
+            <li><a href="services.html">Work With Me</a></li>
+            <li><a href="awareness.html">Fraud Awareness</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Focus Areas -->
+        <div class="footer-col">
+          <h4>Focus Areas</h4>
+          <ul class="footer-links">
+            <li><a href="services.html#career">Career Coaching</a></li>
+            <li><a href="services.html#branding">Personal Branding</a></li>
+            <li><a href="services.html#growth">Growth Karo</a></li>
+            <li><a href="awareness.html">Cyber Fraud Defense</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Connect Directly -->
+        <div class="footer-col">
+          <h4>Direct Contact</h4>
+          <ul class="footer-links">
+            <li><a data-c="email" href="mailto:Bizsocialsurender@gmail.com">Bizsocialsurender@gmail.com</a></li>
+            <li><a data-wa href="https://wa.me/919817242747" target="_blank" rel="noopener noreferrer">WhatsApp Surender</a></li>
+            <li><a data-c="linkedin" href="https://linkedin.com/in/Socialsurender" target="_blank" rel="noopener noreferrer">LinkedIn (@Socialsurender)</a></li>
+            <li><a data-c="instagram" href="https://instagram.com/social_surender" target="_blank" rel="noopener noreferrer">Instagram (@social_surender)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <p>© <span data-c="year">2026</span> <span data-site="name">Surender Verma</span>. All rights reserved.</p>
+        <p>Personal brand website built for trust, safety, and sustainable career &amp; business growth.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Action Pill -->
+  <a class="float-wa" data-wa href="https://wa.me/919817242747" target="_blank" rel="noopener noreferrer" aria-label="Chat directly with Surender on WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.28-2.42 5.83a8.196 8.196 0 0 1-5.82 2.41c-1.47 0-2.92-.39-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.216 8.216 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.45 1.03 2.62.13.17 1.78 2.71 4.3 3.8 2.53 1.09 2.53.73 2.99.69.45-.04 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/>
+    </svg>
+    <span>Chat on WhatsApp</span>
+  </a>
 
   <!-- Config must load before app.js -->
   <script src="config.js"></script>

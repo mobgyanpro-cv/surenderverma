@@ -156,7 +156,7 @@
 
   // 4. Subtle Scroll Reveal (IntersectionObserver)
   function setupScrollReveal() {
-    const elements = $$('.fade-up');
+    const elements = $$('.fade-up, .reveal');
     if (!elements.length) return;
 
     if (!('IntersectionObserver' in window)) {
@@ -268,8 +268,39 @@
     });
   }
 
+  // 8. Dark / Night Mode Engine
+  function setupTheme() {
+    const root = document.documentElement;
+    const toggleBtns = $$('#themeToggle, .theme-toggle');
+
+    function updateIcons(theme) {
+      const isDark = theme === 'dark';
+      toggleBtns.forEach(btn => {
+        btn.innerHTML = isDark ? '☀️' : '🌙';
+        btn.setAttribute('title', isDark ? 'Switch to Light Mode' : 'Switch to Night Mode');
+        btn.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Night Mode');
+      });
+    }
+
+    const savedTheme = localStorage.getItem('sv-theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', currentTheme);
+    updateIcons(currentTheme);
+
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('sv-theme', nextTheme);
+        updateIcons(nextTheme);
+      });
+    });
+  }
+
   // Initialize all modules when DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
+    setupTheme();
     hydrateSiteData();
     setupMobileNav();
     setupHeaderScroll();

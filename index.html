@@ -35,6 +35,16 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F5BFF'/%3E%3Ctext x='50' y='67' font-size='50' font-family='Poppins, sans-serif' font-weight='600' text-anchor='middle' fill='%23ffffff'%3ESV%3C/text%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
+  <!-- Theme Init Script (Zero Flash) -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('sv-theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
 
@@ -75,7 +85,7 @@
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- =======================================================================
-       1. HEADER (Logo, 5 Links, One Primary Button)
+       1. HEADER (Logo, 6 Links, Theme Toggle, Primary Button)
        ======================================================================= -->
   <header class="site-header">
     <div class="container header-inner">
@@ -86,12 +96,16 @@
       <nav class="nav-menu" aria-label="Main Navigation">
         <a href="index.html" class="nav-link active" aria-current="page">Home</a>
         <a href="about.html" class="nav-link">About</a>
+        <a href="ventures.html" class="nav-link">My Ventures</a>
         <a href="services.html" class="nav-link">Work With Me</a>
         <a href="awareness.html" class="nav-link">Fraud Awareness</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
 
       <div class="header-actions">
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Switch theme">
+          🌙
+        </button>
         <a href="contact.html" class="btn-primary" data-cta-link>Book a call</a>
         <button id="mobileNavToggle" class="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
           ☰
@@ -103,6 +117,7 @@
     <div id="mobileNavDrawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
       <a href="index.html" class="mobile-nav-link active">Home</a>
       <a href="about.html" class="mobile-nav-link">About</a>
+      <a href="ventures.html" class="mobile-nav-link">My Ventures</a>
       <a href="services.html" class="mobile-nav-link">Work With Me</a>
       <a href="awareness.html" class="mobile-nav-link">Fraud Awareness</a>
       <a href="contact.html" class="mobile-nav-link">Contact</a>
@@ -275,18 +290,18 @@
       <div class="container">
         <div class="feature-box fade-up">
           <div class="feature-copy">
-            <span class="section-tag">Featured Venture</span>
-            <h3>Growth Karo</h3>
+            <span class="section-tag">Featured Ventures &amp; Initiatives</span>
+            <h3>Growth Karo / Growtheasily &amp; Fraud Free Bharat</h3>
             <p>
-              Founded and led by Surender Verma, <strong>Growth Karo</strong> is dedicated to helping ambitious entrepreneurs and small businesses build meaningful digital traction, improve social engagement, and unlock scalable revenue.
+              Founded and spearheaded by Surender Verma, my work is driven by one mission: helping people grow safely. Through <strong>Growth Karo (Growtheasily)</strong>, I help founders and creators build sustainable digital traction, while <strong>Fraud Free Bharat NGO</strong> protects citizens from predatory scams and network marketing frauds.
             </p>
             <ul class="feature-highlights">
-              <li><i>✓</i> Strategic online positioning that builds immediate credibility</li>
-              <li><i>✓</i> Targeted content and distribution designed for genuine engagement</li>
-              <li><i>✓</i> Modern, mobile-first digital solutions with zero fluff</li>
+              <li><i>✓</i> <strong>Growth Karo / Growtheasily:</strong> Scalable branding, LinkedIn growth, and high-impact digital solutions</li>
+              <li><i>✓</i> <strong>Fraud Free Bharat NGO:</strong> 6+ years actively busting network marketing frauds &amp; cyber scams</li>
+              <li><i>✓</i> <strong>1-on-1 Advisory:</strong> Direct career coaching, AI workflows, and personal branding mentorship</li>
             </ul>
             <div class="btn-group">
-              <a href="services.html#growth" class="btn-primary">Learn About Growth Karo</a>
+              <a href="ventures.html" class="btn-primary">Explore All 3 Ventures &amp; Projects →</a>
               <a href="https://growthkaro.com" class="btn-secondary" data-c="growthKaro" target="_blank" rel="noopener noreferrer">Visit Growth Karo ↗</a>
             </div>
           </div>
@@ -453,6 +468,7 @@
           <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Surender</a></li>
+            <li><a href="ventures.html">My Ventures</a></li>
             <li><a href="services.html">Work With Me</a></li>
             <li><a href="awareness.html">Fraud Awareness</a></li>
             <li><a href="contact.html">Contact</a></li>
