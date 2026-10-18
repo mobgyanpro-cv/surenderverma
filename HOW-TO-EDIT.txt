@@ -1,0 +1,35 @@
+SURENDER VERMA PERSONAL WEBSITE — GITHUB + VERCEL
+
+PAGES
+- index.html       Home
+- services.html    Services
+- work.html        Capabilities
+- about.html       Personal profile
+- contact.html     Local-only message preparation
+- 404.html         Not-found page
+
+SHARED AND CONFIGURATION FILES
+- header.html / footer.html   Shared navigation and footer
+- style.css                  Layout and original white/navy/blue/mint palette
+- app.js                     Browser-side navigation, search, effects and form handling
+- config.js                  Public configuration; contact information is blank
+- vercel.json                Security response headers for Vercel
+- SECURITY.md                Security scope and deployment notes
+- README.md                  Deployment and local preview instructions
+- sitemap.xml.template       Domain placeholder; do not publish until updated
+
+GITHUB + VERCEL
+1. Extract the ZIP and upload all files directly to the repository root.
+2. Import that GitHub repository in Vercel.
+3. No framework, package install or build command is needed. Use the repository root as the output directory.
+4. Deploy and check response headers, page navigation, search, mobile navigation and contact form.
+
+LOCAL PREVIEW
+From the project folder run: python -m http.server 8000
+Open http://localhost:8000. The shared fragments require a local HTTP server.
+
+CONTACT FORM
+The contact form is deliberately not connected to an inbox, service, API or database. It copies a message locally or displays it for manual copying. Nothing is uploaded. To add a real submission flow later, first decide on the provider/backend and data-retention requirements; do not add placeholder authentication or database assumptions.
+
+SECURITY
+This is a static site, not a full-stack account system. No database, API, session or authentication exists. Do not put secrets in config.js. See SECURITY.md before extending the architecture.

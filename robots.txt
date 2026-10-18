@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# Add a Sitemap: directive after replacing the domain placeholder and publishing sitemap.xml.
