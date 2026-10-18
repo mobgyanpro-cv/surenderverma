@@ -1,16 +1,50 @@
-WHICH FILE TO EDIT
-config.js     -> your name, email, phone, WhatsApp, website (updates every page)
-header.html   -> top menu (add or remove menu links here)
-footer.html   -> footer columns and links
-index.html    -> Home page text
-services.html -> Services page text and prices
-work.html     -> Projects list
-about.html    -> About text and timeline
-contact.html  -> Contact page text and form
-style.css     -> colours, fonts, spacing (colours are at the very top of the file)
-app.js        -> animations and behaviour (usually no need to touch)
+SUR​ENDER VERMA WEBSITE — GITHUB + VERCEL
 
-TIPS
-- Keep all files in the same folder.
-- header.html and footer.html load through the browser, so test on your Vercel link
-  (or a local server), not by double-clicking the file.
+FILES
+- index.html       Home page
+- services.html    Services and project process
+- work.html        Capability examples (not fabricated client case studies)
+- about.html       Personal profile and approach
+- contact.html     Contact details and enquiry form
+- header.html      Shared navigation
+- footer.html      Shared footer
+- style.css        Design, layout, colours and responsive behaviour
+- app.js           Navigation, theme, search, animations and contact form
+- config.js        Central contact details and branding
+- robots.txt       Basic search-engine crawl instructions
+- sitemap.xml      Sitemap for the configured domain
+- README.md        Project notes
+
+IMPORTANT CONTACT SETTINGS
+Open config.js to edit email, WhatsApp number, phone number, website URL and brand text.
+WhatsApp format: country code + number, digits only. Do not include +, spaces or dashes.
+The supplied details have been carried forward from the files you uploaded. Verify them before publishing.
+
+GITHUB + VERCEL DEPLOYMENT
+1. Keep all files in the same root folder of the repository.
+2. Upload/commit the files to GitHub.
+3. In Vercel, import the GitHub repository.
+4. This is a static HTML/CSS/JavaScript site. No build command is required.
+5. Set the output directory to the repository root (usually leave the default for a static project).
+6. Deploy. Every new push to the connected branch should trigger a deployment.
+
+LOCAL PREVIEW
+Because header.html and footer.html are loaded using fetch(), do not test by double-clicking index.html.
+Run a local static server from the project folder, for example:
+  python -m http.server 8000
+Then open http://localhost:8000
+
+CONTACT FORM LIMITATION
+The form opens the visitor's default email app with a prefilled message using mailto:.
+It does not submit to a server or guarantee delivery. If you want an on-site form, connect a form provider or backend later.
+
+CONTENT INTEGRITY
+The website avoids presenting invented client names, testimonials, performance metrics or project results as real.
+Add genuine case studies only after verifying the details and obtaining permission where needed.
+
+BEFORE PUBLISHING
+- Verify email, phone, WhatsApp and domain in config.js.
+- Check every page on desktop and mobile.
+- Test the mobile menu, search, theme toggle, contact links and form.
+- Add a real profile photo and social profile links if desired.
+- Confirm that all service descriptions and any public claims accurately reflect your current offerings.

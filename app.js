@@ -1,52 +1,270 @@
-/* Shared behaviour. Header = header.html, footer = footer.html, details = config.js */
-const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)],P=document.body.dataset.p;
-const C={email:SITE.email,wa:SITE.whatsapp};
-async function part(file,pos){let h;
-  try{const r=await fetch(file);if(!r.ok)throw 0;h=await r.text()}
-  catch{h=pos=="afterbegin"?'<header><div class="w"><a class="lg" href="index.html">Home</a><nav><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>':'<footer><div class="w"><p>© Surender Verma</p></div></footer>'}
-  document.body.insertAdjacentHTML(pos,h.replace(/\{\{(\w+)\}\}/g,(m,k)=>SITE[k]??""))}
-(async()=>{
-document.body.insertAdjacentHTML("afterbegin",'<div id="pb"></div>');
-await Promise.all([part("header.html","afterbegin"),part("footer.html","beforeend")]);
-$$("nav [data-p]").forEach(a=>a.classList.toggle("on",a.dataset.p==P));
-const wa="https://wa.me/"+SITE.whatsapp;
-$$("[data-wa]").forEach(a=>a.href=wa);
-$$("[data-c]").forEach(a=>{const k=a.dataset.c;
-  if(k=="email"){a.href="mailto:"+SITE.email;a.textContent=SITE.email}
-  if(k=="phone"){a.href="tel:"+SITE.phone;a.textContent="Call "+SITE.phoneText}
-  if(k=="wa"){a.href=wa;a.textContent="WhatsApp "+SITE.phoneText}
-  if(k=="site"){a.href=SITE.website;a.textContent=SITE.website.replace("https://","")}});
-if($("#hd")){
-const hd=$("#hd"),nv=$("#nv"),bg=$("#bg"),R=document.documentElement;
-const shut=()=>{nv.classList.remove("open");document.body.style.overflow="";bg.textContent="☰"};
-bg.onclick=()=>{const o=nv.classList.toggle("open");document.body.style.overflow=o?"hidden":"";bg.textContent=o?"✕":"☰"};
-$$("#nv a").forEach(a=>a.addEventListener("click",shut));
-$("#annx").onclick=()=>{$("#ann").classList.add("x");try{sessionStorage.setItem("ann","1")}catch{}};
-try{if(sessionStorage.getItem("ann"))$("#ann").classList.add("x")}catch{}
-let ly=0;addEventListener("scroll",()=>{const y=scrollY;hd.classList.toggle("sc",y>20);hd.classList.toggle("hide",y>ly&&y>300&&!nv.classList.contains("open"));ly=y},{passive:true});
-try{const t=localStorage.getItem("theme");if(t)R.dataset.theme=t}catch{}
-$("#th").onclick=()=>{const d=R.dataset.theme=="dark"?"light":"dark";R.dataset.theme=d;try{localStorage.setItem("theme",d)}catch{}};
-const items=[["Home","index.html"],["Premium websites","services.html#websites"],["Business apps","services.html#apps"],["Custom CRM","services.html#crm"],["Chrome extensions","services.html#ext"],["Our work","work.html"],["About","about.html"],["Contact us","contact.html"],["Chat on WhatsApp",wa],["Send an email","mailto:"+SITE.email]];
-const cp=$("#cp"),ci=$("#cpi"),cl=$("#cpl");let sel=0,cur=items;
-const draw=()=>{cl.innerHTML=cur.map((x,i)=>`<li><a href="${x[1]}" class="${i==sel?"sel":""}">${x[0]}</a></li>`).join("")||"<li style='padding:14px'>No match</li>"};
-const openP=()=>{cp.hidden=false;ci.value="";cur=items;sel=0;draw();ci.focus()},closeP=()=>cp.hidden=true;
-$("#srch").onclick=openP;cp.onclick=e=>{if(e.target==cp)closeP()};cl.addEventListener("click",closeP);
-ci.oninput=()=>{const q=ci.value.toLowerCase();cur=items.filter(x=>x[0].toLowerCase().includes(q));sel=0;draw()};
-addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=="k"){e.preventDefault();cp.hidden?openP():closeP()}
-if(cp.hidden)return;if(e.key=="Escape")closeP();if(e.key=="ArrowDown"){e.preventDefault();sel=Math.min(sel+1,cur.length-1);draw()}if(e.key=="ArrowUp"){e.preventDefault();sel=Math.max(sel-1,0);draw()}if(e.key=="Enter"&&cur[sel])location.href=cur[sel][1]});
+/* Shared site behaviour: header/footer partials, navigation, theme, search and contact form. */
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const PAGE = document.body.dataset.p;
+
+async function loadPartial(file, position) {
+  try {
+    const response = await fetch(file);
+    if (!response.ok) throw new Error(`Could not load ${file}`);
+    const markup = await response.text();
+    document.body.insertAdjacentHTML(position, markup.replace(/\{\{(\w+)\}\}/g, (match, key) => SITE[key] ?? ""));
+  } catch (error) {
+    console.error(error);
+    const fallback = position === "afterbegin"
+      ? '<header class="fallback-header"><div class="w"><a class="lg" href="index.html">Surender<b>.</b>Verma</a><nav><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>'
+      : '<footer><div class="w"><p>© Surender Verma</p></div></footer>';
+    document.body.insertAdjacentHTML(position, fallback);
+  }
 }
-addEventListener("scroll",()=>{const h=document.documentElement;$("#pb").style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%"},{passive:1});
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
-$$(".rv,.bars").forEach((e,i)=>{e.style.transitionDelay=(i%4)*.08+"s";io.observe(e)});
-const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;co.unobserve(e.target);const t=+e.target.dataset.n,s=performance.now();(function f(n){const k=Math.min((n-s)/1600,1);e.target.textContent=Math.round(t*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(s)}));
-$$("[data-n]").forEach(e=>co.observe(e));
-$$(".card").forEach(c=>{c.onmousemove=e=>{const r=c.getBoundingClientRect();c.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*8+"deg");c.style.setProperty("--rx",-((e.clientY-r.top)/r.height-.5)*8+"deg")};c.onmouseleave=()=>{c.style.setProperty("--rx","0deg");c.style.setProperty("--ry","0deg")}});
-$$(".fl button").forEach(b=>b.onclick=()=>{$$(".fl button").forEach(x=>x.setAttribute("aria-pressed",x==b));$$("[data-t]").forEach(c=>c.hidden=b.dataset.f!="all"&&c.dataset.t!=b.dataset.f)});
-const f=$("#form");if(f)f.onsubmit=e=>{e.preventDefault();const d=new FormData(f);location.href=`mailto:${C.email}?subject=${encodeURIComponent("Project enquiry from "+d.get("n"))}&body=${encodeURIComponent(d.get("m")+"\n\nType: "+d.get("t")+"\nFrom: "+d.get("n")+" ("+d.get("e")+")")}`;$("#ok").textContent="Your email app should open with the message ready."};
-const cv=$("#c");if(cv&&!matchMedia("(prefers-reduced-motion:reduce)").matches){const x=cv.getContext("2d");let W,H,m={x:-1e3,y:-1e3},N=[];const rs=()=>{W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;N=Array.from({length:Math.min(70,W/14|0)},()=>({x:Math.random()*W,y:Math.random()*H,vx:Math.random()-.5,vy:Math.random()-.5}))};rs();addEventListener("resize",rs);cv.parentNode.onpointermove=e=>{const r=cv.getBoundingClientRect();m.x=e.clientX-r.left;m.y=e.clientY-r.top};
-(function d(){x.clearRect(0,0,W,H);N.forEach((a,i)=>{a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;const dm=Math.hypot(a.x-m.x,a.y-m.y);if(dm<160){a.x+=(m.x-a.x)*.01;a.y+=(m.y-a.y)*.01}x.fillStyle=dm<160?"#2f5bff":"#9bb2f5";x.beginPath();x.arc(a.x,a.y,2.2,0,7);x.fill();for(let j=i+1;j<N.length;j++){const b=N[j],l=Math.hypot(a.x-b.x,a.y-b.y);if(l<130){x.strokeStyle=`rgba(47,91,255,${.3-l/450})`;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}});requestAnimationFrame(d)})()}
 
-const rt=$("#rot");if(rt){const q=["launch a website that converts?","track every lead and follow-up?","automate billing and bookings?","cut repetitive browser work?","look premium on every phone?","turn visitors into enquiries?"];let i=0;setInterval(()=>{rt.classList.add("out");setTimeout(()=>{i=(i+1)%q.length;rt.textContent=q[i];rt.classList.remove("out")},400)},2800)}
-const vd=$(".vid button");if(vd)vd.onclick=()=>{const v=vd.parentNode;v.classList.toggle("on");vd.textContent=v.classList.contains("on")?"Pause":"Play preview"};
+function setupContactLinks() {
+  const whatsappUrl = `https://wa.me/${SITE.whatsapp}`;
+  $$("[data-wa]").forEach((link) => {
+    link.href = whatsappUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+  });
+  $$("[data-c]").forEach((link) => {
+    const type = link.dataset.c;
+    if (type === "email") {
+      link.href = `mailto:${SITE.email}`;
+      if (link.closest(".contact-links")) {
+        const bold = $("b", link);
+        if (bold) bold.textContent = SITE.email;
+      } else if (!link.textContent.trim() || link.textContent.includes("Loading")) {
+        link.textContent = SITE.email;
+      }
+    }
+    if (type === "phone") {
+      link.href = `tel:${SITE.phone}`;
+      link.textContent = `Call ${SITE.phoneText}`;
+    }
+    if (type === "wa") {
+      link.href = whatsappUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      if (link.closest(".contact-links")) {
+        const bold = $("b", link);
+        if (bold) bold.textContent = SITE.phoneText;
+      } else link.textContent = `WhatsApp ${SITE.phoneText}`;
+    }
+    if (type === "site") {
+      link.href = SITE.website;
+      if (link.closest(".contact-links")) {
+        const bold = $("b", link);
+        if (bold) bold.textContent = SITE.website.replace(/^https?:\/\//, "");
+      } else link.textContent = SITE.website.replace(/^https?:\/\//, "");
+    }
+  });
+}
 
+function setupHeader() {
+  const header = $("#hd");
+  const nav = $("#nv");
+  const menuButton = $("#bg");
+  if (!header || !nav || !menuButton) return;
+
+  const closeMenu = () => {
+    nav.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.textContent = "☰";
+    document.body.style.overflow = "";
+  };
+  menuButton.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("open");
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+    menuButton.textContent = isOpen ? "×" : "☰";
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  });
+  $$("a", nav).forEach((link) => link.addEventListener("click", closeMenu));
+
+  const closeAnnouncement = $("#annx");
+  if (closeAnnouncement) closeAnnouncement.addEventListener("click", () => {
+    $("#ann")?.classList.add("x");
+    try { sessionStorage.setItem("announcement-closed", "1"); } catch {}
+  });
+  try {
+    if (sessionStorage.getItem("announcement-closed")) $("#ann")?.classList.add("x");
+  } catch {}
+
+  let previousY = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    header.classList.toggle("sc", y > 20);
+    header.classList.toggle("hide", y > previousY && y > 380 && !nav.classList.contains("open"));
+    previousY = y;
+  }, { passive: true });
+
+  const root = document.documentElement;
+  try {
+    const savedTheme = localStorage.getItem("sv-theme");
+    if (savedTheme === "light" || savedTheme === "dark") root.dataset.theme = savedTheme;
+  } catch {}
+  $("#th")?.addEventListener("click", () => {
+    const nextTheme = root.dataset.theme === "light" ? "dark" : "light";
+    root.dataset.theme = nextTheme;
+    try { localStorage.setItem("sv-theme", nextTheme); } catch {}
+  });
+}
+
+function setupSearch() {
+  const searchButton = $("#srch"), panel = $("#cp"), input = $("#cpi"), list = $("#cpl");
+  if (!searchButton || !panel || !input || !list) return;
+  const whatsappUrl = `https://wa.me/${SITE.whatsapp}`;
+  const items = [
+    ["Home", "index.html"], ["Websites & landing pages", "services.html#websites"],
+    ["Digital marketing & lead generation", "services.html#marketing"],
+    ["Automation & AI workflows", "services.html#automation"],
+    ["Digital safety & fraud awareness", "services.html#security"],
+    ["Capabilities", "work.html"], ["About Surender", "about.html"],
+    ["Contact", "contact.html"], ["WhatsApp", whatsappUrl], ["Email", `mailto:${SITE.email}`]
+  ];
+  let filtered = items, selected = 0;
+  const draw = () => {
+    list.innerHTML = filtered.map((item, index) =>
+      `<li><a href="${item[1]}" class="${index === selected ? "sel" : ""}">${item[0]}</a></li>`
+    ).join("") || '<li class="mut" style="padding:12px">No matching pages</li>';
+  };
+  const open = () => { panel.hidden = false; input.value = ""; filtered = items; selected = 0; draw(); input.focus(); };
+  const close = () => { panel.hidden = true; searchButton.focus(); };
+  searchButton.addEventListener("click", open);
+  panel.addEventListener("click", (event) => { if (event.target === panel) close(); });
+  list.addEventListener("click", () => { panel.hidden = true; });
+  input.addEventListener("input", () => {
+    const query = input.value.trim().toLowerCase();
+    filtered = items.filter((item) => item[0].toLowerCase().includes(query));
+    selected = 0; draw();
+  });
+  window.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+      event.preventDefault(); panel.hidden ? open() : close();
+    }
+    if (panel.hidden) return;
+    if (event.key === "Escape") close();
+    if (event.key === "ArrowDown") { event.preventDefault(); selected = Math.min(selected + 1, filtered.length - 1); draw(); }
+    if (event.key === "ArrowUp") { event.preventDefault(); selected = Math.max(selected - 1, 0); draw(); }
+    if (event.key === "Enter" && filtered[selected]) window.location.href = filtered[selected][1];
+  });
+}
+
+function setupMotionAndFilters() {
+  const progress = $("#pb");
+  const updateProgress = () => {
+    if (!progress) return;
+    const root = document.documentElement;
+    const max = root.scrollHeight - root.clientHeight;
+    progress.style.width = `${max > 0 ? root.scrollTop / max * 100 : 0}%`;
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add("in"); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    $$(".rv").forEach((element, index) => {
+      element.style.transitionDelay = `${(index % 3) * 70}ms`;
+      revealObserver.observe(element);
+    });
+  } else $$(".rv").forEach((element) => element.classList.add("in"));
+
+  $$(".fl button").forEach((button) => button.addEventListener("click", () => {
+    $$(".fl button").forEach((other) => other.setAttribute("aria-pressed", String(other === button)));
+    $$("[data-t]").forEach((card) => {
+      card.hidden = button.dataset.f !== "all" && card.dataset.t !== button.dataset.f;
+    });
+  }));
+
+  const canvas = $("#c");
+  if (canvas && canvas.getContext && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const context = canvas.getContext("2d");
+    let width = 0, height = 0, points = [];
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width; height = rect.height;
+      canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      points = Array.from({ length: Math.min(44, Math.floor(width / 24)) }, () => ({
+        x: Math.random() * width, y: Math.random() * height,
+        vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35
+      }));
+    };
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
+    let frame;
+    const draw = () => {
+      context.clearRect(0, 0, width, height);
+      points.forEach((point, index) => {
+        point.x += point.vx; point.y += point.vy;
+        if (point.x < 0 || point.x > width) point.vx *= -1;
+        if (point.y < 0 || point.y > height) point.vy *= -1;
+        context.fillStyle = "#66e3b4";
+        context.beginPath(); context.arc(point.x, point.y, 1.5, 0, Math.PI * 2); context.fill();
+        for (let next = index + 1; next < points.length; next++) {
+          const other = points[next], distance = Math.hypot(point.x - other.x, point.y - other.y);
+          if (distance < 105) {
+            context.strokeStyle = `rgba(102,227,180,${.13 * (1 - distance / 105)})`;
+            context.lineWidth = 1; context.beginPath(); context.moveTo(point.x, point.y); context.lineTo(other.x, other.y); context.stroke();
+          }
+        }
+      });
+      frame = window.requestAnimationFrame(draw);
+    };
+    draw();
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) window.cancelAnimationFrame(frame);
+      else draw();
+    });
+  }
+
+  const rotatingText = $("#rot");
+  if (rotatingText) {
+    const phrases = ["business growth.", "a stronger online presence.", "smarter workflows.", "clearer customer journeys."];
+    let index = 0;
+    window.setInterval(() => {
+      rotatingText.classList.add("out");
+      window.setTimeout(() => {
+        index = (index + 1) % phrases.length;
+        rotatingText.textContent = phrases[index];
+        rotatingText.classList.remove("out");
+      }, 240);
+    }, 3000);
+  }
+}
+
+function setupContactForm() {
+  const form = $("#form");
+  if (!form) return;
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const subject = `Project enquiry from ${data.get("n")}`;
+    const body = [
+      `Name: ${data.get("n")}`,
+      `Email: ${data.get("e")}`,
+      `Project type: ${data.get("t")}`,
+      "",
+      "Project details:",
+      data.get("m")
+    ].join("\n");
+    const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const status = $("#ok");
+    if (status) status.textContent = "Opening your email application with the enquiry prepared…";
+    window.location.href = mailto;
+  });
+}
+
+(async function init() {
+  document.body.insertAdjacentHTML("afterbegin", '<div id="pb" aria-hidden="true"></div>');
+  await Promise.all([loadPartial("header.html", "afterbegin"), loadPartial("footer.html", "beforeend")]);
+  $$("nav [data-p]").forEach((link) => link.classList.toggle("on", link.dataset.p === PAGE));
+  setupContactLinks();
+  setupHeader();
+  setupSearch();
+  setupMotionAndFilters();
+  setupContactForm();
 })();

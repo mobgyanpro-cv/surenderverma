@@ -1,15 +1,15 @@
-/* SITE DETAILS: change your name, email, phone and links here. Every page updates automatically. */
+/* Central website configuration. Update contact details here. */
 const SITE = {
-  brand: 'Surender<b>.</b>Verma',          // logo text in the header and footer
-  owner: 'Surender Verma',                 // name used in the copyright line
-  tagline: 'Websites, apps and CRM systems<br>for growing businesses.',
-  announce: '🚀 Now taking new projects.',   // top announcement bar text
-  announceLink: 'Book a free call',
-  cta: 'Book a meeting',                   // header button text
-  email: 'contact@surenderverma.com',
-  whatsapp: '919595958383',                // country code + number, no + or spaces
+  brand: 'Surender<b>.</b>Verma',
+  owner: 'Surender Verma',
+  tagline: 'Digital growth, websites & automation.',
+  announce: 'Building smarter digital systems for growing businesses.',
+  announceLink: 'Let’s talk',
+  cta: 'Start a project',
+  email: 'indiamaksolutions@gmail.com',
+  whatsapp: '919595958383',
   phone: '+919595958383',
   phoneText: '+91 95959 58383',
-  website: 'https://surenderverma.com',
+  website: 'https://indiamaksolutions.com',
   year: new Date().getFullYear()
 };
