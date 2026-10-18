@@ -70,57 +70,137 @@
   </div>
 
   <!-- Hero Section -->
-  <section class="hero l">
+  <section class="hero l hero-modern">
     <canvas id="c" aria-hidden="true"></canvas>
+
+    <!-- Ambient 3D Glow Blobs -->
+    <div class="hero-glow glow-1" aria-hidden="true"></div>
+    <div class="hero-glow glow-2" aria-hidden="true"></div>
+
     <div class="w hg">
+      <!-- Left Column: Copy & CTAs -->
       <div class="hero-copy rv">
-        <span class="tag"><i></i> Available for client projects · 2026</span>
+        <div class="status-pill">
+          <span class="status-ping"><i></i></span>
+          <span>Available for New Projects · Q4 2026</span>
+        </div>
+
         <p class="eyebrow">Hi, I’m Surender Verma</p>
-        <h1>I help turn digital ideas into <span id="rot" class="rot">measurable business growth.</span></h1>
-        <p class="lead">Specialized in responsive web development, targeted digital marketing, automated lead funnels, and practical workflow systems that save hours of manual effort.</p>
-        <div class="btns">
-          <a class="btn m" href="contact.html">Discuss a project <span aria-hidden="true">↗</span></a>
-          <a class="btn" href="services.html">Explore services</a>
+
+        <h1 class="hero-title">
+          Turning digital ideas into <br>
+          <span class="hero-gradient-text"><span id="rot" class="rot">measurable business growth.</span></span>
+        </h1>
+
+        <p class="lead">
+          Specialized in high-speed responsive web development, data-driven lead generation funnels, and automated n8n workflows that save hours of manual business operations.
+        </p>
+
+        <div class="btns hero-actions">
+          <a class="btn m hero-cta-btn" href="contact.html">
+            <span>Discuss a Project</span>
+            <span class="btn-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="btn hero-sec-btn" href="services.html">
+            <span>Explore Services</span>
+          </a>
         </div>
-        <p class="small mut" style="margin-top: 18px;">📍 Based in India · Working with clients in Pune, Mumbai & globally remote</p>
+
+        <!-- Trust Badges Under CTAs -->
+        <div class="hero-proof-chips">
+          <span class="proof-chip">⚡ <span>Ultra-Fast (&lt; 0.8s)</span></span>
+          <span class="proof-chip">📱 <span>100% Mobile-First</span></span>
+          <span class="proof-chip">⚙️ <span>Automated Workflows</span></span>
+        </div>
+
+        <p class="small mut hero-location-note">
+          📍 Pune & Mumbai, India · Working with clients locally & globally remote
+        </p>
       </div>
-      
-      <div class="visual-card rv">
-        <div class="visual-top">
-          <span class="window-dots"><i></i><i></i><i></i></span>
-          <span>Digital Growth Engine</span>
-          <span class="live-dot">● Active</span>
-        </div>
-        <div class="visual-main">
-          <div class="visual-kicker">END-TO-END EXECUTION</div>
-          <div class="visual-flow">
-            <div class="flow-node">
-              <span>01</span>
-              <b>Strategy</b>
-              <small>Positioning & Goals</small>
-            </div>
-            <div class="flow-line"></div>
-            <div class="flow-node active">
-              <span>02</span>
-              <b>Build</b>
-              <small>Web & Funnels</small>
-            </div>
-            <div class="flow-line"></div>
-            <div class="flow-node">
-              <span>03</span>
-              <b>Automate</b>
-              <small>Sync & Scale</small>
+
+      <!-- Right Column: 3D Holographic Showcase Card -->
+      <div class="hero-3d-scene rv">
+        <div class="hero-3d-card">
+          <!-- Glass Specular Reflection Highlight -->
+          <div class="card-glass-sheen" aria-hidden="true"></div>
+
+          <!-- 3D Floating Badge 1 (Top-Right Depth Pop) -->
+          <div class="float-badge-3d badge-speed">
+            <span class="badge-icon">⚡</span>
+            <div>
+              <b>99/100</b>
+              <small>Speed & SEO</small>
             </div>
           </div>
-          <div class="visual-bottom">
+
+          <!-- 3D Floating Badge 2 (Bottom-Left Depth Pop) -->
+          <div class="float-badge-3d badge-growth">
+            <span class="badge-icon">📈</span>
             <div>
-              <span class="mini-icon">↗</span>
-              <div>
-                <b>High-converting results</b>
-                <small>Zero fluff, measurable impact</small>
+              <b>+280%</b>
+              <small>Lead Growth</small>
+            </div>
+          </div>
+
+          <!-- Card Top Bar -->
+          <div class="visual-top">
+            <div class="window-dots">
+              <i class="dot-red"></i>
+              <i class="dot-yellow"></i>
+              <i class="dot-green"></i>
+            </div>
+            <span class="card-sys-title">SYSTEM ARCHITECTURE // LIVE</span>
+            <span class="live-dot"><i class="radar-ping"></i> LIVE</span>
+          </div>
+
+          <!-- Main Card Content -->
+          <div class="visual-main">
+            <div class="visual-kicker-row">
+              <span class="visual-kicker">END-TO-END DIGITAL ROADMAP</span>
+              <span class="uptime-badge">99.9% Uptime</span>
+            </div>
+
+            <!-- 3D Flow Nodes -->
+            <div class="visual-flow 3d-flow">
+              <div class="flow-node node-1">
+                <span class="node-num">01</span>
+                <b>Strategy</b>
+                <small>Research & Funnel</small>
+              </div>
+              <div class="flow-line"><i class="flow-pulse"></i></div>
+              <div class="flow-node node-2 active">
+                <span class="node-num">02</span>
+                <b>Build</b>
+                <small>Web & Funnels</small>
+              </div>
+              <div class="flow-line"><i class="flow-pulse delay"></i></div>
+              <div class="flow-node node-3">
+                <span class="node-num">03</span>
+                <b>Automate</b>
+                <small>n8n & CRM Sync</small>
               </div>
             </div>
-            <div class="visual-pill">100% Responsive & Fast</div>
+
+            <!-- Live Status Ticker -->
+            <div class="live-terminal-ticker">
+              <span class="term-prompt">&gt;</span>
+              <span class="term-text">Automated Workflows: Active (0 manual bottlenecks)</span>
+            </div>
+
+            <!-- Card Bottom Bar -->
+            <div class="visual-bottom">
+              <div class="visual-bottom-info">
+                <span class="mini-icon">🚀</span>
+                <div>
+                  <b>High-ROI Digital Execution</b>
+                  <small>Zero fluff · Direct communication</small>
+                </div>
+              </div>
+              <div class="visual-pill verified-pill">
+                <span>⭐ 5.0</span>
+                <small>18+ Projects</small>
+              </div>
+            </div>
           </div>
         </div>
       </div>

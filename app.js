@@ -271,14 +271,69 @@
     });
   }
 
-  // Interactive Particle Background Canvas
+  // Interactive 3D Canvas Background (3D Polyhedral Core & Depth Starfield)
   function setupCanvas() {
     const canvas = $('#c');
     if (!canvas || !canvas.getContext || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const ctx = canvas.getContext('2d');
-    let width = 0, height = 0, particles = [], animationId;
+    let width = 0, height = 0, animationId;
     let mouse = { x: -1000, y: -1000 };
+    let currMouseX = 0, currMouseY = 0;
+
+    // 3D Icosahedron Base Vertices (Golden Ratio)
+    const phi = (1 + Math.sqrt(5)) / 2;
+    const baseVertices = [
+      [-1,  phi, 0], [ 1,  phi, 0], [-1, -phi, 0], [ 1, -phi, 0],
+      [ 0, -1,  phi], [ 0,  1,  phi], [ 0, -1, -phi], [ 0,  1, -phi],
+      [ phi, 0, -1], [ phi, 0,  1], [-phi, 0, -1], [-phi, 0,  1]
+    ];
+
+    // Normalize vertices
+    const vLen = Math.hypot(1, phi);
+    const icoRadius = 145;
+    const vertices = baseVertices.map(v => [
+      (v[0] / vLen) * icoRadius,
+      (v[1] / vLen) * icoRadius,
+      (v[2] / vLen) * icoRadius
+    ]);
+
+    // Icosahedron Edges (connecting pairs of vertices)
+    const edges = [];
+    for (let i = 0; i < vertices.length; i++) {
+      for (let j = i + 1; j < vertices.length; j++) {
+        const d = Math.hypot(
+          vertices[i][0] - vertices[j][0],
+          vertices[i][1] - vertices[j][1],
+          vertices[i][2] - vertices[j][2]
+        );
+        // Golden ratio distance between adjacent vertices
+        if (Math.abs(d - (2 * icoRadius / vLen)) < 15) {
+          edges.push([i, j]);
+        }
+      }
+    }
+
+    // 3D Floating Particles Field
+    let particles3D = [];
+    const initParticles = () => {
+      const count = Math.min(65, Math.floor(width / 20));
+      particles3D = Array.from({ length: count }, () => {
+        const r = 80 + Math.random() * (Math.min(width, height) * 0.45);
+        const theta = Math.random() * Math.PI * 2;
+        const phiAngle = (Math.random() - 0.5) * Math.PI;
+        return {
+          x: r * Math.cos(theta) * Math.cos(phiAngle),
+          y: r * Math.sin(phiAngle),
+          z: r * Math.sin(theta) * Math.cos(phiAngle),
+          speed: (Math.random() * 0.008 + 0.004) * (Math.random() < 0.5 ? 1 : -1),
+          radius: Math.random() * 1.8 + 1,
+          orbitR: r,
+          theta: theta,
+          phi: phiAngle
+        };
+      });
+    };
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -288,15 +343,7 @@
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      const count = Math.min(50, Math.floor(width / 22));
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        radius: Math.random() * 1.5 + 1
-      }));
+      initParticles();
     };
 
     resize();
@@ -314,43 +361,105 @@
       });
     }
 
+    let rotX = 0.2, rotY = 0.3, rotZ = 0;
+    const cameraZ = 450;
+
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      particles.forEach((p, i) => {
-        p.x += p.vx;
-        p.y += p.vy;
+      const isLight = document.documentElement.dataset.theme === 'light';
+      const centerX = width * 0.72; // Position 3D core subtly behind the hero card
+      const centerY = height * 0.5;
 
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
+      // Auto rotation
+      rotX += 0.0025;
+      rotY += 0.0035;
 
-        // Subtle mouse interaction
-        const mDist = Math.hypot(p.x - mouse.x, p.y - mouse.y);
-        if (mDist < 120) {
-          p.x += (mouse.x - p.x) * 0.015;
-          p.y += (mouse.y - p.y) * 0.015;
-        }
+      // Mouse interactive tilt with lerp
+      if (mouse.x > 0) {
+        const targetMX = (mouse.y / height - 0.5) * 0.75;
+        const targetMY = (mouse.x / width - 0.5) * 0.75;
+        currMouseX += (targetMX - currMouseX) * 0.04;
+        currMouseY += (targetMY - currMouseY) * 0.04;
+      } else {
+        currMouseX += (0 - currMouseX) * 0.02;
+        currMouseY += (0 - currMouseY) * 0.02;
+      }
 
-        ctx.fillStyle = document.documentElement.dataset.theme === 'light' ? 'rgba(37, 99, 235, 0.65)' : 'rgba(59, 130, 246, 0.7)';
+      const totalRotX = rotX + currMouseX;
+      const totalRotY = rotY + currMouseY;
+
+      // Precalculate trig
+      const cosX = Math.cos(totalRotX), sinX = Math.sin(totalRotX);
+      const cosY = Math.cos(totalRotY), sinY = Math.sin(totalRotY);
+
+      // 3D Point Rotation & Projection Helper
+      const project3D = (x, y, z) => {
+        // Rotate Y
+        let x1 = x * cosY - z * sinY;
+        let z1 = z * cosY + x * sinY;
+        // Rotate X
+        let y2 = y * cosX - z1 * sinX;
+        let z2 = z1 * cosX + y * sinX;
+
+        const scale = cameraZ / (cameraZ + z2);
+        return {
+          x: x1 * scale + centerX,
+          y: y2 * scale + centerY,
+          z: z2,
+          scale: scale
+        };
+      };
+
+      // Project vertices of 3D icosahedron
+      const projectedVerts = vertices.map(v => project3D(v[0], v[1], v[2]));
+
+      // Draw 3D Edges with depth cueing
+      edges.forEach(([i, j]) => {
+        const p1 = projectedVerts[i];
+        const p2 = projectedVerts[j];
+        const avgZ = (p1.z + p2.z) / 2;
+        const depthAlpha = Math.max(0.08, Math.min(0.55, 0.32 + avgZ / 500));
+
+        ctx.strokeStyle = isLight
+          ? `rgba(37, 99, 235, ${depthAlpha * 0.85})`
+          : `rgba(96, 165, 250, ${depthAlpha})`;
+        ctx.lineWidth = Math.max(0.8, (p1.scale + p2.scale) * 0.75);
+
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      });
 
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if (dist < 110) {
-            const alpha = 0.18 * (1 - dist / 110);
-            ctx.strokeStyle = document.documentElement.dataset.theme === 'light'
-              ? `rgba(37, 99, 235, ${alpha})`
-              : `rgba(96, 165, 250, ${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
+      // Draw 3D Glowing Vertices
+      projectedVerts.forEach(p => {
+        const depthAlpha = Math.max(0.2, Math.min(0.9, 0.5 + p.z / 400));
+        ctx.fillStyle = isLight
+          ? `rgba(37, 99, 235, ${depthAlpha})`
+          : `rgba(52, 211, 153, ${depthAlpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3 * p.scale, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Render 3D Orbiting Particles Field
+      particles3D.forEach(pt => {
+        pt.theta += pt.speed;
+        const px = pt.orbitR * Math.cos(pt.theta) * Math.cos(pt.phi);
+        const py = pt.orbitR * Math.sin(pt.phi);
+        const pz = pt.orbitR * Math.sin(pt.theta) * Math.cos(pt.phi);
+
+        const proj = project3D(px, py, pz);
+        const alpha = Math.max(0.12, Math.min(0.75, 0.45 + proj.z / 500));
+
+        ctx.fillStyle = isLight
+          ? `rgba(37, 99, 235, ${alpha})`
+          : `rgba(147, 197, 253, ${alpha})`;
+
+        ctx.beginPath();
+        ctx.arc(proj.x, proj.y, Math.max(0.8, pt.radius * proj.scale), 0, Math.PI * 2);
+        ctx.fill();
       });
 
       animationId = window.requestAnimationFrame(render);
@@ -362,6 +471,62 @@
       if (document.hidden) window.cancelAnimationFrame(animationId);
       else render();
     });
+  }
+
+  // 3D Holographic Card Interactive Physics (Spring Tilt & Dynamic Specular Sheen)
+  function setupHero3DTilt() {
+    const scene = $('.hero-3d-scene');
+    const card = $('.hero-3d-card');
+    if (!scene || !card) return;
+
+    let bounds = scene.getBoundingClientRect();
+    let targetRx = 0, targetRy = 0;
+    let currRx = 0, currRy = 0;
+    let isHovered = false;
+
+    window.addEventListener('resize', () => {
+      bounds = scene.getBoundingClientRect();
+    }, { passive: true });
+
+    scene.addEventListener('pointerenter', () => {
+      isHovered = true;
+      bounds = scene.getBoundingClientRect();
+    });
+
+    scene.addEventListener('pointermove', (e) => {
+      const x = e.clientX - bounds.left;
+      const y = e.clientY - bounds.top;
+      const px = (x / bounds.width - 0.5) * 2; // -1 to 1
+      const py = (y / bounds.height - 0.5) * 2; // -1 to 1
+
+      targetRy = px * 14;  // max 14deg Y rotation
+      targetRx = -py * 14; // max 14deg X rotation
+
+      // Set specular light sheen coordinates
+      card.style.setProperty('--mx', `${(x / bounds.width) * 100}%`);
+      card.style.setProperty('--my', `${(y / bounds.height) * 100}%`);
+    });
+
+    scene.addEventListener('pointerleave', () => {
+      isHovered = false;
+      targetRx = 0;
+      targetRy = 0;
+      card.style.setProperty('--mx', `50%`);
+      card.style.setProperty('--my', `50%`);
+    });
+
+    // 60fps spring lerp loop
+    const updateTilt = () => {
+      currRx += (targetRx - currRx) * 0.12;
+      currRy += (targetRy - currRy) * 0.12;
+
+      card.style.setProperty('--rx', `${currRx.toFixed(2)}deg`);
+      card.style.setProperty('--ry', `${currRy.toFixed(2)}deg`);
+
+      requestAnimationFrame(updateTilt);
+    };
+
+    updateTilt();
   }
 
   // Rotating Hero Text Headline
@@ -514,6 +679,7 @@
     setupHeader();
     setupCommandPalette();
     setupCanvas();
+    setupHero3DTilt();
     setupRotatingText();
     setupFilters();
     setupScrollProgress();
