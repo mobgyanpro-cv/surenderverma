@@ -1,0 +1,41 @@
+================================================================================
+  SURENDER VERMA — WEBSITE GUIDE & HOW TO EDIT
+================================================================================
+
+1. QUICK EDITING GUIDE
+--------------------------------------------------------------------------------
+- config.js     -> Your name, email, phone, WhatsApp number, tagline, and website URL.
+                   Updating this file updates details across all pages automatically!
+- index.html    -> Home page: hero section, visual card, services preview, CTA.
+- services.html -> In-depth breakdown of Websites, Marketing, Automation & Safety, FAQs.
+- work.html     -> Capabilities & portfolio showcase with interactive filter pills.
+- about.html    -> Biography, skill proficiency meters, core principles & timeline.
+- contact.html  -> Direct WhatsApp, email, call cards & project inquiry form.
+- style.css     -> All visual styling, dual-theme (Dark/Light mode), and responsive layout.
+- app.js        -> Theme toggle, Command Palette (Ctrl+K), particle animations, form mailer.
+
+2. UPLOADING TO YOUR HOSTING / SERVER
+--------------------------------------------------------------------------------
+This website is 100% static (HTML, CSS, JS) and requires ZERO build tools or npm!
+You can upload all the files directly to:
+- Vercel (Drag and drop folder or connect via GitHub)
+- Netlify (Drag and drop folder into Netlify Drop)
+- GitHub Pages (Push repository and enable Pages in repository settings)
+- cPanel / Shared Hosting (Upload all files directly into your public_html folder)
+- Hostinger / GoDaddy / Namecheap / HostGator
+
+3. TESTING LOCALLY
+--------------------------------------------------------------------------------
+- You can now double-click ANY .html file directly in your browser (Chrome, Edge,
+  Firefox, Safari) and it will open immediately with full header and footer!
+- Alternatively, use VS Code's "Live Server" extension for live reloading as you edit.
+
+4. FEATURES BUILT-IN
+--------------------------------------------------------------------------------
+✓ Dual Theme: Instant Dark Mode & Light Mode switcher with localStorage persistence.
+✓ Command Palette: Press Ctrl + K (or click the search button) to search pages & actions.
+✓ Instant WhatsApp: Floating WhatsApp button & direct WhatsApp chat buttons.
+✓ Zero CORS Blocker: Headers & footers are embedded for maximum SEO and reliability.
+✓ Responsive: Handcrafted for flawless display on iPhones, Androids, Tablets & Desktops.
+✓ Fast: 0 external heavy frameworks; 100/100 performance capability.
+================================================================================
