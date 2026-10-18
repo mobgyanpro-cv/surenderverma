@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surender Verma | M.A.K Solutions: Websites, Apps and CRM</title>
+<meta name="description" content="Surender Verma and M.A.K Solutions build premium mobile-first websites, business apps, CRM systems and Chrome extensions for clients in Pune and Mumbai.">
+<meta name="theme-color" content="#0b1220">
+<meta property="og:title" content="Surender Verma | Web Developer">
+<meta property="og:description" content="Fast, clear websites for small businesses and startups.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23f2a900'/%3E%3Ctext x='50' y='70' font-size='62' font-family='Georgia' font-weight='700' text-anchor='middle' fill='%230e1a2b'%3ES%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Surender Verma","jobTitle":"Web Developer","worksFor":{"@type":"Organization","name":"M.A.K Solutions","url":"https://indiamaksolutions.com"},"address":{"@type":"PostalAddress","addressLocality":"Sirsa","addressRegion":"Haryana","addressCountry":"IN"}}
+</script>
+<style>
+:root{
+  --bg:#f3f5f9; --ink:#0e1a2b; --muted:#4e5d75; --line:#d3dae7; --card:#ffffff;
+  --accent:#a84f08; --hi:#f2a900; --on-hi:#0e1a2b;
+  --serif:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --sans:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+:root[data-theme="dark"]{
+  --bg:#0b1220; --ink:#eaf0fa; --muted:#9db0cb; --line:#1f2d46; --card:#111b2f;
+  --accent:#f5b638; --hi:#f2a900;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1220; --ink:#eaf0fa; --muted:#9db0cb; --line:#1f2d46; --card:#111b2f; --accent:#f5b638;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--hi);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--hi);color:var(--on-hi);padding:8px 14px;z-index:99;border-radius:6px}
+.skip:focus{left:8px}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--hi);z-index:60}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.logo{font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--ink);text-decoration:none}
+nav ul{list-style:none;display:flex;gap:4px;align-items:center}
+nav ul a{display:block;padding:8px 12px;border-radius:99px;text-decoration:none;color:var(--muted);font-size:.93rem;font-weight:500}
+nav ul a:hover{color:var(--ink)}
+nav ul a.on{background:var(--ink);color:var(--bg)}
+#theme{background:none;border:1px solid var(--line);color:var(--ink);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem}
+@media(max-width:700px){nav ul li:not(:last-child){display:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:110px 0 90px;--mx:70%;--my:30%}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(520px circle at var(--mx) var(--my),color-mix(in srgb,var(--hi) 30%,transparent),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative}
+.status{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--card);padding:6px 14px;border-radius:99px;font-size:.88rem;color:var(--muted)}
+.status i{width:9px;height:9px;border-radius:50%;background:#2fb36b;display:block}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(3rem,9vw,7rem);line-height:1;letter-spacing:-.04em;margin:30px 0 28px}
+h1 span{display:block}
+h1 span+span{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.lead{max-width:36em;font-size:clamp(1.1rem,2.4vw,1.4rem);color:var(--muted);line-height:1.55}
+.lead b{color:var(--ink);font-weight:600}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{display:inline-block;padding:13px 24px;border-radius:8px;font-weight:600;text-decoration:none;border:2px solid var(--ink);color:var(--ink);background:none;cursor:pointer;font:inherit;font-weight:600}
+.btn.main{background:var(--hi);border-color:var(--hi);color:var(--on-hi)}
+.btn:hover{transform:translateY(-2px)}
+.btn{transition:transform .15s}
+
+.hero-grid{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:center}
+.portrait{width:300px;height:300px;margin:0;justify-self:end;animation:float 6s ease-in-out infinite}
+.portrait svg{display:block;width:100%;height:100%;overflow:visible}
+.spin{transform-origin:150px 150px;animation:spin 28s linear infinite}
+.orbit{transform-origin:150px 150px;animation:spin 14s linear infinite reverse}
+.ringtext{font-family:var(--sans);font-size:15px;font-weight:500;fill:var(--ink)}
+.mono{font-family:var(--serif);font-weight:700;font-size:112px;letter-spacing:-.04em;fill:var(--on-hi)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-10px)}}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr;gap:24px}.portrait{order:-1;width:200px;height:200px;justify-self:start}}
+@media (prefers-reduced-motion:reduce){.portrait,.spin,.orbit{animation:none}}
+
+/* sections */
+section{padding:84px 0;border-top:1px solid var(--line)}
+h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);line-height:1.1;letter-spacing:-.03em;margin-bottom:12px}
+.sub{color:var(--muted);max-width:38em;margin-bottom:40px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+@media(max-width:800px){.cols{grid-template-columns:1fr;gap:36px}}
+.cols p+p{margin-top:16px}
+
+/* timeline */
+.tl{list-style:none;border-left:2px solid var(--line);padding-left:26px}
+.tl li{position:relative;padding-bottom:28px}
+.tl li::before{content:"";position:absolute;left:-34px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--hi);border:3px solid var(--bg)}
+.tl time{font-size:.85rem;color:var(--muted)}
+.tl h3{font-size:1.05rem;margin:2px 0}
+.tl p{color:var(--muted);font-size:.97rem}
+
+/* services */
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:280px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line)}
+.row h3{font-family:var(--serif);font-size:1.4rem}
+.row p{color:var(--muted);max-width:40em}
+@media(max-width:700px){.row{grid-template-columns:1fr;gap:6px}}
+
+.steps{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.steps li{border-top:3px solid var(--hi);padding-top:16px}
+.steps span{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:.85rem;font-weight:600;margin-bottom:10px}
+.steps h3{font-size:1.1rem;margin-bottom:4px}
+.steps p{color:var(--muted);font-size:.95rem}
+/* skills */
+.skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.skillgrid div{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:22px}
+.skillgrid h3{font-size:1rem;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+.chips li{font-size:.88rem;padding:4px 12px;border-radius:99px;background:var(--bg);border:1px solid var(--line)}
+
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.filters button{font:inherit;font-size:.92rem;padding:7px 16px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+.project{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:0;overflow:hidden}
+.project .thumb{height:150px;display:grid;place-items:center;font-family:var(--serif);font-size:2.6rem;font-weight:700;color:var(--on-hi);background:var(--hi)}
+.project:nth-child(2) .thumb{background:#8fd3b6}
+.project:nth-child(3) .thumb{background:#a9bff2}
+.project:nth-child(4) .thumb{background:#f2b5a0}
+.project .body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.project h3{font-size:1.15rem}
+.project p{color:var(--muted);font-size:.96rem;flex:1}
+.project .links{display:flex;gap:16px;font-size:.92rem;font-weight:600}
+.project[hidden]{display:none}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+@media(max-width:800px){.contact{grid-template-columns:1fr;gap:36px}}
+.big{font-family:var(--serif);font-size:clamp(1.4rem,3.6vw,2.1rem);word-break:break-all}
+.social{list-style:none;margin-top:22px;display:grid;gap:8px}
+form{display:grid;gap:16px}
+label{font-weight:600;font-size:.93rem;display:block;margin-bottom:6px}
+input,textarea{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+#msg{min-height:1.4em;font-size:.92rem;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="bar"></div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">Surender Verma</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><button id="theme" type="button" aria-label="Switch light and dark theme">◐</button></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+    <span class="status"><i></i>Open to freelance projects</span>
+    <h1><span>Surender</span><span>Verma</span></h1>
+    <p class="lead">Web developer and digital consultant. Through <b>M.A.K Solutions</b> we build mobile-first websites, business apps, CRM systems and Chrome extensions for clients in <b>Pune and Mumbai</b>.</p>
+    <div class="btns">
+      <a class="btn main" href="#projects">See my work</a>
+      <a class="btn" href="#contact">Start a project</a>
+    </div>
+    </div>
+    <figure class="portrait">
+      <svg viewBox="0 0 300 300" role="img" aria-label="Rotating badge with the initials SV">
+        <defs><path id="ring" d="M150,150 m-122,0 a122,122 0 1,1 244,0 a122,122 0 1,1 -244,0"/></defs>
+        <g class="spin"><text class="ringtext"><textPath href="#ring" textLength="760" lengthAdjust="spacing">Digital Business Consultant  •  Web Developer  •  Digital Career Coach  •  </textPath></text></g>
+        <circle cx="150" cy="150" r="98" fill="var(--hi)"/>
+        <circle cx="150" cy="150" r="108" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="3 7"/>
+        <text class="mono" x="150" y="187" text-anchor="middle">SV</text>
+        <g class="orbit"><circle cx="150" cy="20" r="7" fill="var(--ink)"/><circle cx="150" cy="280" r="5" fill="var(--hi)" stroke="var(--ink)" stroke-width="2"/></g>
+      </svg>
+    </figure>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap cols">
+    <div>
+      <h2>About me</h2>
+      <p>I design and build websites from scratch: the layout, the code and the hosting. I care about pages that load quickly on a phone and say clearly what a business does.</p>
+      <p>Replace this paragraph with your own story: how you started, what you enjoy building, and what clients can expect when they work with you.</p>
+    </div>
+    <ol class="tl" aria-label="Journey">
+      <li><time>2026 to now</time><h3>Freelance web developer</h3><p>Building websites for local businesses and startups.</p></li>
+      <li><time>2025</time><h3>Learning full-stack development</h3><p>HTML, CSS, JavaScript, databases and deployment.</p></li>
+      <li><time>Earlier</time><h3>Where it began</h3><p>Add your education or first project here.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <h2>What we build</h2>
+    <p class="sub">One studio, four capabilities, each designed around how your business actually works.</p>
+    <div class="rows">
+      <div class="row"><h3>Premium websites</h3><p>Mobile-first sites that present your brand clearly and turn visits into enquiries.</p></div>
+      <div class="row"><h3>Business apps</h3><p>Focused tools for billing, operations, client records and daily routines.</p></div>
+      <div class="row"><h3>Custom CRM</h3><p>Simple pipelines, follow-ups and client history without unnecessary complexity.</p></div>
+      <div class="row"><h3>Chrome extensions</h3><p>Browser tools that take repetitive online work off your team.</p></div>
+    </div>
+    <h2 style="margin-top:72px">How we work</h2>
+    <p class="sub">Scope, cost and timeline are agreed before development begins.</p>
+    <ol class="steps">
+      <li><span>1</span><h3>Discover</h3><p>We learn your business, your customers and your everyday workflow.</p></li>
+      <li><span>2</span><h3>Design</h3><p>You preview the direction and approve the experience.</p></li>
+      <li><span>3</span><h3>Build</h3><p>We develop the agreed features and test the key interactions.</p></li>
+      <li><span>4</span><h3>Launch</h3><p>You review the final build, approve the release and get a handover.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Tools I use</h2>
+    <p class="sub">The stack I’m comfortable shipping with.</p>
+    <div class="skillgrid">
+      <div><h3>Front end</h3><ul class="chips"><li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Responsive design</li><li>Accessibility</li></ul></div>
+      <div><h3>Back end and data</h3><ul class="chips"><li>PHP</li><li>MySQL</li><li>Node.js</li><li>REST APIs</li><li>CRM systems</li><li>Chrome extensions</li></ul></div>
+      <div><h3>CMS and hosting</h3><ul class="chips"><li>WordPress</li><li>cPanel</li><li>DirectAdmin</li><li>SSL</li><li>LiteSpeed</li></ul></div>
+      <div><h3>Workflow</h3><ul class="chips"><li>Git</li><li>GitHub</li><li>GitHub Pages</li><li>VS Code</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Selected work</h2>
+    <p class="sub">Real builds from M.A.K Solutions. Use the filters to sort them.</p>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="website" aria-pressed="false">Websites</button>
+      <button type="button" data-f="app" aria-pressed="false">Apps and CRM</button>
+      <button type="button" data-f="ext" aria-pressed="false">Extensions</button>
+    </div>
+    <div class="projects">
+      <article class="project" data-t="website"><div class="thumb">B</div><div class="body"><h3>The Bakehouse Patisserie</h3><p>A mobile-first ordering journey where customers explore cakes, personalise them and enquire on WhatsApp.</p><div class="links"><a href="https://indiamaksolutions.com/the-bakehouse-patisserie" target="_blank" rel="noopener">View case study</a></div></div></article>
+      <article class="project" data-t="website"><div class="thumb">S</div><div class="body"><h3>SmileCraft Dental Clinic</h3><p>A clinic site that links patient concerns to treatments and appointment actions, with a built-in concern checker.</p><div class="links"><a href="https://indiamaksolutions.com/smilecraft-dental-clinic" target="_blank" rel="noopener">View case study</a></div></div></article>
+      <article class="project" data-t="app"><div class="thumb">A</div><div class="body"><h3>Physiotherapy CRM</h3><p>An offline Android app for patients, sessions, packages, balances and follow-up reminders.</p><div class="links"><a href="https://indiamaksolutions.com/achilles-physiotherapy-website" target="_blank" rel="noopener">View case study</a></div></div></article>
+      <article class="project" data-t="ext"><div class="thumb">QA</div><div class="body"><h3>Site Inspector</h3><p>A Chrome extension that finds pages, captures screens and exports an organised audit as a ZIP file.</p><div class="links"><a href="https://indiamaksolutions.com/work" target="_blank" rel="noopener">See all work</a></div></div></article>
+    </div>
+    <p style="margin-top:28px"><a href="https://indiamaksolutions.com/work" target="_blank" rel="noopener">View all 18 builds on indiamaksolutions.com</a></p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact">
+    <div>
+      <h2>Let’s talk</h2>
+      <p class="sub">Tell us what should become easier. We take projects across Pune and Mumbai, remotely or in person.</p>
+      <p class="big" id="mail"></p>
+      <div class="btns"><button class="btn" id="copy" type="button">Copy email</button></div>
+      <ul class="social" id="social"></ul>
+    </div>
+    <form id="form">
+      <div><label for="n">Your name</label><input id="n" required autocomplete="name"></div>
+      <div><label for="e">Your email</label><input id="e" type="email" required autocomplete="email"></div>
+      <div><label for="m">What do you need?</label><textarea id="m" rows="5" required></textarea></div>
+      <button class="btn main" type="submit">Send message</button>
+      <p id="msg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© <span id="y">2026</span> Surender Verma, Sirsa, India</span><a href="#top">Back to top</a></div>
+</footer>
+
+<script>
+/* EDIT ONLY THIS BLOCK to personalise the whole site */
+const CONFIG = {
+  email: "indiamaksolutions@gmail.com",
+  github: "your-username",
+  linkedin: "",   // e.g. "surender-verma"
+  whatsapp: "919595958383",
+  phone: "+919595958383",
+  website: "https://indiamaksolutions.com",
+  google: "https://maps.app.goo.gl/aQS2WDF3wz2xYR3J6",
+  demo: "#"
+};
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+/* contact details */
+$("#mail").innerHTML = `<a href="mailto:${CONFIG.email}">${CONFIG.email}</a>`;
+const links = [
+  CONFIG.whatsapp && ["WhatsApp +91 95959 58383", `https://wa.me/${CONFIG.whatsapp}`],
+  CONFIG.phone && ["Call +91 95959 58383", `tel:${CONFIG.phone}`],
+  CONFIG.website && ["indiamaksolutions.com", CONFIG.website],
+  CONFIG.google && ["Google profile", CONFIG.google],
+  CONFIG.linkedin && ["LinkedIn", `https://www.linkedin.com/in/${CONFIG.linkedin}`],
+  CONFIG.github && CONFIG.github !== "your-username" && ["GitHub", `https://github.com/${CONFIG.github}`]
+].filter(Boolean);
+$("#social").innerHTML = links.map(l => `<li><a href="${l[1]}" target="_blank" rel="noopener">${l[0]}</a></li>`).join("");
+$$("[data-repo]").forEach(a => a.href = `https://github.com/${CONFIG.github}/${a.dataset.repo}`);
+$$('[data-link="demo"]').forEach(a => a.href = CONFIG.demo);
+$("#y").textContent = new Date().getFullYear();
+
+$("#copy").onclick = async e => {
+  try { await navigator.clipboard.writeText(CONFIG.email); e.target.textContent = "Copied"; }
+  catch { e.target.textContent = "Press Ctrl+C on the address"; }
+  setTimeout(() => e.target.textContent = "Copy email", 2000);
+};
+
+$("#form").onsubmit = e => {
+  e.preventDefault();
+  const body = `${$("#m").value}\n\nFrom: ${$("#n").value} (${$("#e").value})`;
+  location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent("Website enquiry from " + $("#n").value)}&body=${encodeURIComponent(body)}`;
+  $("#msg").textContent = "Your email app should open with the message ready to send.";
+};
+
+/* project filters */
+$$(".filters button").forEach(b => b.onclick = () => {
+  $$(".filters button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  $$(".project").forEach(p => p.hidden = b.dataset.f !== "all" && p.dataset.t !== b.dataset.f);
+});
+
+/* theme (saved if the browser allows it) */
+const root = document.documentElement;
+try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch {}
+$("#theme").onclick = () => {
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("theme", root.dataset.theme); } catch {}
+};
+
+/* scroll progress */
+addEventListener("scroll", () => {
+  const h = document.documentElement;
+  $("#bar").style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
+}, {passive: true});
+
+/* active nav link */
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if (en.isIntersecting) $$("nav ul a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id));
+}), {rootMargin: "-45% 0px -50% 0px"});
+$$("main section").forEach(s => io.observe(s));
+
+/* hero light follows the pointer */
+const hero = $(".hero");
+hero.addEventListener("pointermove", e => {
+  const r = hero.getBoundingClientRect();
+  hero.style.setProperty("--mx", (e.clientX - r.left) + "px");
+  hero.style.setProperty("--my", (e.clientY - r.top) + "px");
+});
+</script>
+</body>
+</html>
