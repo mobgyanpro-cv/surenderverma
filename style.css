@@ -167,6 +167,22 @@
   border-color: var(--border-color) !important;
 }
 
+[data-theme="dark"] .footer-contact-item {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .footer-contact-item:hover {
+  background: rgba(47, 91, 255, 0.12) !important;
+  border-color: var(--color-primary) !important;
+}
+
+[data-theme="dark"] .footer-status-pill {
+  background: rgba(47, 91, 255, 0.15) !important;
+  border-color: rgba(47, 91, 255, 0.3) !important;
+  color: #799BFB !important;
+}
+
 /* Base Reset & Box Sizing */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -1130,14 +1146,26 @@ img {
 }
 
 /* ==========================================================================
-   10. FOOTER
+   10. FOOTER — Premium Elevated Design
    ========================================================================== */
 .site-footer {
   background-color: var(--bg-surface);
   border-top: 1px solid var(--border-color);
-  padding-top: 56px;
+  padding-top: 68px;
   padding-bottom: 40px;
   margin-top: auto;
+  position: relative;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-primary) 50%, transparent 100%);
+  opacity: 0.65;
 }
 
 .footer-grid {
@@ -1158,17 +1186,67 @@ img {
   line-height: 1.6;
 }
 
+.footer-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  margin-top: 16px;
+  border: 1px solid rgba(47, 91, 255, 0.15);
+}
+
+.footer-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-success);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(18, 184, 134, 0.25);
+}
+
+.footer-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+.footer-location svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
 .footer-col {
   min-width: 0;
 }
 
 .footer-col h4 {
-  font-size: 0.96rem;
+  font-size: 0.82rem;
   font-weight: var(--font-weight-bold);
   color: var(--text-main);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
 }
 
 .footer-links {
@@ -1183,9 +1261,100 @@ img {
   color: var(--text-muted);
   overflow-wrap: anywhere;
   word-break: normal;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
+
 .footer-links a:hover {
   color: var(--color-primary);
+  transform: translateX(4px);
+}
+
+/* Direct Contact Social Cards / Rows */
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-fast);
+  min-width: 0;
+}
+
+.footer-contact-item:hover {
+  border-color: var(--color-primary);
+  background: var(--bg-surface);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.footer-contact-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.footer-contact-item:hover .footer-contact-icon {
+  transform: scale(1.08);
+}
+
+.footer-contact-icon.icon-wa {
+  background: #25D366;
+  color: #FFFFFF;
+}
+
+.footer-contact-icon.icon-in {
+  background: #0A66C2;
+  color: #FFFFFF;
+}
+
+.footer-contact-icon.icon-ig {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: #FFFFFF;
+}
+
+.footer-contact-icon.icon-mail {
+  background: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.footer-contact-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.footer-contact-title {
+  font-size: 0.90rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.footer-contact-detail {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .footer-bottom {
@@ -1197,6 +1366,15 @@ img {
   font-size: 0.88rem;
   color: var(--text-light);
   text-align: center;
+}
+
+.footer-bottom-trust {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--text-muted);
 }
 
 /* WhatsApp Floating Action Pill */
