@@ -16,7 +16,25 @@ $$("[data-c]").forEach(a=>{const k=a.dataset.c;
   if(k=="phone"){a.href="tel:"+SITE.phone;a.textContent="Call "+SITE.phoneText}
   if(k=="wa"){a.href=wa;a.textContent="WhatsApp "+SITE.phoneText}
   if(k=="site"){a.href=SITE.website;a.textContent=SITE.website.replace("https://","")}});
-$("#bg").onclick=()=>$("nav").classList.toggle("open");
+if($("#hd")){
+const hd=$("#hd"),nv=$("#nv"),bg=$("#bg"),R=document.documentElement;
+const shut=()=>{nv.classList.remove("open");document.body.style.overflow="";bg.textContent="☰"};
+bg.onclick=()=>{const o=nv.classList.toggle("open");document.body.style.overflow=o?"hidden":"";bg.textContent=o?"✕":"☰"};
+$$("#nv a").forEach(a=>a.addEventListener("click",shut));
+$("#annx").onclick=()=>{$("#ann").classList.add("x");try{sessionStorage.setItem("ann","1")}catch{}};
+try{if(sessionStorage.getItem("ann"))$("#ann").classList.add("x")}catch{}
+let ly=0;addEventListener("scroll",()=>{const y=scrollY;hd.classList.toggle("sc",y>20);hd.classList.toggle("hide",y>ly&&y>300&&!nv.classList.contains("open"));ly=y},{passive:true});
+try{const t=localStorage.getItem("theme");if(t)R.dataset.theme=t}catch{}
+$("#th").onclick=()=>{const d=R.dataset.theme=="dark"?"light":"dark";R.dataset.theme=d;try{localStorage.setItem("theme",d)}catch{}};
+const items=[["Home","index.html"],["Premium websites","services.html#websites"],["Business apps","services.html#apps"],["Custom CRM","services.html#crm"],["Chrome extensions","services.html#ext"],["Our work","work.html"],["About","about.html"],["Contact us","contact.html"],["Chat on WhatsApp",wa],["Send an email","mailto:"+SITE.email]];
+const cp=$("#cp"),ci=$("#cpi"),cl=$("#cpl");let sel=0,cur=items;
+const draw=()=>{cl.innerHTML=cur.map((x,i)=>`<li><a href="${x[1]}" class="${i==sel?"sel":""}">${x[0]}</a></li>`).join("")||"<li style='padding:14px'>No match</li>"};
+const openP=()=>{cp.hidden=false;ci.value="";cur=items;sel=0;draw();ci.focus()},closeP=()=>cp.hidden=true;
+$("#srch").onclick=openP;cp.onclick=e=>{if(e.target==cp)closeP()};cl.addEventListener("click",closeP);
+ci.oninput=()=>{const q=ci.value.toLowerCase();cur=items.filter(x=>x[0].toLowerCase().includes(q));sel=0;draw()};
+addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=="k"){e.preventDefault();cp.hidden?openP():closeP()}
+if(cp.hidden)return;if(e.key=="Escape")closeP();if(e.key=="ArrowDown"){e.preventDefault();sel=Math.min(sel+1,cur.length-1);draw()}if(e.key=="ArrowUp"){e.preventDefault();sel=Math.max(sel-1,0);draw()}if(e.key=="Enter"&&cur[sel])location.href=cur[sel][1]});
+}
 addEventListener("scroll",()=>{const h=document.documentElement;$("#pb").style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%"},{passive:1});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
 $$(".rv,.bars").forEach((e,i)=>{e.style.transitionDelay=(i%4)*.08+"s";io.observe(e)});

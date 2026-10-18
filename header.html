@@ -1,15 +1,26 @@
-<header><div class="w"><a class="lg" href="index.html">{{brand}}</a><button id="bg" aria-label="Menu">Menu</button>
-<nav>
+<header id="hd">
+<div class="ann" id="ann"><span>{{announce}} <a href="contact.html">{{announceLink}}</a></span><button id="annx" aria-label="Close announcement">×</button></div>
+<div class="w bar"><a class="lg" href="index.html">{{brand}}</a>
+<nav id="nv">
   <a href="index.html" data-p="index">Home</a>
   <div class="dd"><a href="services.html" data-p="services">Services ▾</a>
-    <div class="dm">
-      <a href="services.html#websites">Premium websites</a>
-      <a href="services.html#apps">Business apps</a>
-      <a href="services.html#crm">Custom CRM</a>
-      <a href="services.html#ext">Chrome extensions</a>
+    <div class="mega">
+      <a href="services.html#websites"><i>🌐</i><b>Premium websites</b><span>Fast, mobile-first sites</span></a>
+      <a href="services.html#apps"><i>📱</i><b>Business apps</b><span>Billing, bookings, records</span></a>
+      <a href="services.html#crm"><i>🧩</i><b>Custom CRM</b><span>Leads and follow-ups</span></a>
+      <a href="services.html#ext"><i>🔌</i><b>Chrome extensions</b><span>Automate browser tasks</span></a>
     </div>
   </div>
   <a href="work.html" data-p="work">Work</a>
   <a href="about.html" data-p="about">About</a>
-  <a href="contact.html" class="btn m">{{cta}}</a>
-</nav></div></header>
+  <a href="contact.html" data-p="contact">Contact</a>
+</nav>
+<div class="act">
+  <button id="srch" class="ib" type="button" aria-label="Search the site">🔍 <kbd>Ctrl K</kbd></button>
+  <button id="th" class="ib" type="button" aria-label="Switch light and dark theme">◐</button>
+  <a class="ib wa" data-wa href="#" aria-label="Chat on WhatsApp">WhatsApp</a>
+  <a class="btn m sm" href="contact.html">{{cta}}</a>
+  <button id="bg" class="ib" type="button" aria-label="Menu">☰</button>
+</div></div>
+</header>
+<div id="cp" hidden role="dialog" aria-label="Search"><div class="cpb"><input id="cpi" placeholder="Search pages and services…" autocomplete="off" aria-label="Search"><ul id="cpl"></ul><p>↑ ↓ to move · Enter to open · Esc to close</p></div></div>
