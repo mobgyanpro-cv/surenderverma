@@ -1,41 +1,56 @@
 ================================================================================
-  SURENDER VERMA — WEBSITE GUIDE & HOW TO EDIT
+  SURENDER VERMA (surenderverma.cv) — WEBSITE GUIDE & HOW TO EDIT
 ================================================================================
 
-1. QUICK EDITING GUIDE
+1. SITE OVERVIEW (5 Core Pages)
 --------------------------------------------------------------------------------
-- config.js     -> Your name, email, phone, WhatsApp number, tagline, and website URL.
-                   Updating this file updates details across all pages automatically!
-- index.html    -> Home page: hero section, visual card, services preview, CTA.
-- services.html -> In-depth breakdown of Websites, Marketing, Automation & Safety, FAQs.
-- work.html     -> Capabilities & portfolio showcase with interactive filter pills.
-- about.html    -> Biography, skill proficiency meters, core principles & timeline.
-- contact.html  -> Direct WhatsApp, email, call cards & project inquiry form.
-- style.css     -> All visual styling, dual-theme (Dark/Light mode), and responsive layout.
-- app.js        -> Theme toggle, Command Palette (Ctrl+K), particle animations, form mailer.
+- index.html     -> Home page (Portrait, credibility stats, how I can help,
+                    short bio, Growth Karo feature, Fraud Buster tips,
+                    testimonials, final CTA).
+- about.html     -> Full story, Sirsa background, milestones, education (IGNOU),
+                    values, and volunteering openness.
+- services.html  -> Work With Me: Career Coaching, Personal Branding, Growth Karo
+                    business consulting, Cyber Security advisory, 3-step process, FAQs.
+- awareness.html -> Fraud Awareness & Cyber Safety Guide: Common scams, warning
+                    signs, emergency action plan, and official 1930 / cybercrime.gov.in details.
+- contact.html   -> Direct contact page: short inquiry form, WhatsApp link,
+                    LinkedIn button, email, and Sirsa, Haryana location.
 
-2. UPLOADING TO YOUR HOSTING / SERVER
+2. HOW TO UPDATE YOUR DETAILS
 --------------------------------------------------------------------------------
-This website is 100% static (HTML, CSS, JS) and requires ZERO build tools or npm!
-You can upload all the files directly to:
-- Vercel (Drag and drop folder or connect via GitHub)
-- Netlify (Drag and drop folder into Netlify Drop)
-- GitHub Pages (Push repository and enable Pages in repository settings)
-- cPanel / Shared Hosting (Upload all files directly into your public_html folder)
-- Hostinger / GoDaddy / Namecheap / HostGator
+All your personal contact information and links are centralized in config.js!
+Open "config.js" to edit:
+  - name        : Surender Verma
+  - location    : Sirsa, Haryana, India
+  - email       : Bizsocialsurender@gmail.com
+  - whatsapp    : 919817242747 (Display: +91 98172 42747)
+  - linkedin    : https://linkedin.com/in/Socialsurender (@Socialsurender)
+  - instagram   : https://instagram.com/social_surender (@social_surender)
+  - growthKaro  : https://growthkaro.com
 
-3. TESTING LOCALLY
+3. HOW TO ADD YOUR PORTRAIT PHOTO
 --------------------------------------------------------------------------------
-- You can now double-click ANY .html file directly in your browser (Chrome, Edge,
-  Firefox, Safari) and it will open immediately with full header and footer!
-- Alternatively, use VS Code's "Live Server" extension for live reloading as you edit.
+1. Place your photo inside the "images" folder.
+2. Name the file: "surender.jpg"
+3. The website will immediately load your picture in the hero section!
+   (If the photo is missing or has a different name, a clean SVG placeholder
+   displays automatically without broken image icons).
 
-4. FEATURES BUILT-IN
+4. HOW TO CUSTOMIZE PLACEHOLDERS IN HTML FILES
 --------------------------------------------------------------------------------
-✓ Dual Theme: Instant Dark Mode & Light Mode switcher with localStorage persistence.
-✓ Command Palette: Press Ctrl + K (or click the search button) to search pages & actions.
-✓ Instant WhatsApp: Floating WhatsApp button & direct WhatsApp chat buttons.
-✓ Zero CORS Blocker: Headers & footers are embedded for maximum SEO and reliability.
-✓ Responsive: Handcrafted for flawless display on iPhones, Androids, Tablets & Desktops.
-✓ Fast: 0 external heavy frameworks; 100/100 performance capability.
+Every customizable block has an HTML comment starting with <!-- PLACEHOLDER: ... -->
+- In index.html: Testimonial names and feedback in the dark section.
+- In about.html: Confirming your exact degree at IGNOU.
+- In awareness.html: Verification of local cybercrime reporting details.
+
+5. HOW TO UPLOAD TO WEB HOSTING
+--------------------------------------------------------------------------------
+This website is 100% static (pure HTML, CSS, JavaScript) with ZERO build tools,
+zero node_modules, and zero npm commands needed!
+You can directly upload all files to:
+- Vercel (drag and drop the folder or connect via GitHub)
+- Netlify (drag and drop into Netlify Drop)
+- GitHub Pages (push code and enable Pages in repository settings)
+- Hostinger, GoDaddy, Namecheap, cPanel (upload all files to public_html)
+
 ================================================================================

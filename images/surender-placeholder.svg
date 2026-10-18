@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 560" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EBF1FA"/>
+      <stop offset="100%" stop-color="#D7E3F5"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2F5BFF"/>
+      <stop offset="100%" stop-color="#1E3FCC"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="560" rx="24" fill="url(#bgGrad)"/>
+  <circle cx="240" cy="190" r="85" fill="#C5D5EB"/>
+  <path d="M120 440 C120 325 360 325 360 440 Z" fill="#C5D5EB"/>
+  <!-- Subtle Badge -->
+  <rect x="140" y="470" width="200" height="42" rx="21" fill="url(#accentGrad)"/>
+  <text x="240" y="497" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="14" fill="#FFFFFF">Surender Verma</text>
+  <text x="240" y="270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="13" fill="#5B6B85">Add images/surender.jpg</text>
+</svg>
