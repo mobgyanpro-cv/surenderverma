@@ -1,50 +1,35 @@
-SUR​ENDER VERMA WEBSITE — GITHUB + VERCEL
+SURENDER VERMA PERSONAL WEBSITE — GITHUB + VERCEL
 
-FILES
-- index.html       Home page
-- services.html    Services and project process
-- work.html        Capability examples (not fabricated client case studies)
-- about.html       Personal profile and approach
-- contact.html     Contact details and enquiry form
-- header.html      Shared navigation
-- footer.html      Shared footer
-- style.css        Design, layout, colours and responsive behaviour
-- app.js           Navigation, theme, search, animations and contact form
-- config.js        Central contact details and branding
-- robots.txt       Basic search-engine crawl instructions
-- sitemap.xml      Sitemap for the configured domain
-- README.md        Project notes
+PAGES
+- index.html       Home
+- services.html    Services
+- work.html        Capabilities
+- about.html       Personal profile
+- contact.html     Local-only message preparation
+- 404.html         Not-found page
 
-IMPORTANT CONTACT SETTINGS
-Open config.js to edit email, WhatsApp number, phone number, website URL and brand text.
-WhatsApp format: country code + number, digits only. Do not include +, spaces or dashes.
-The supplied details have been carried forward from the files you uploaded. Verify them before publishing.
+SHARED AND CONFIGURATION FILES
+- header.html / footer.html   Shared navigation and footer
+- style.css                  Layout and original white/navy/blue/mint palette
+- app.js                     Browser-side navigation, search, effects and form handling
+- config.js                  Public configuration; contact information is blank
+- vercel.json                Security response headers for Vercel
+- SECURITY.md                Security scope and deployment notes
+- README.md                  Deployment and local preview instructions
+- sitemap.xml.template       Domain placeholder; do not publish until updated
 
-GITHUB + VERCEL DEPLOYMENT
-1. Keep all files in the same root folder of the repository.
-2. Upload/commit the files to GitHub.
-3. In Vercel, import the GitHub repository.
-4. This is a static HTML/CSS/JavaScript site. No build command is required.
-5. Set the output directory to the repository root (usually leave the default for a static project).
-6. Deploy. Every new push to the connected branch should trigger a deployment.
+GITHUB + VERCEL
+1. Extract the ZIP and upload all files directly to the repository root.
+2. Import that GitHub repository in Vercel.
+3. No framework, package install or build command is needed. Use the repository root as the output directory.
+4. Deploy and check response headers, page navigation, search, mobile navigation and contact form.
 
 LOCAL PREVIEW
-Because header.html and footer.html are loaded using fetch(), do not test by double-clicking index.html.
-Run a local static server from the project folder, for example:
-  python -m http.server 8000
-Then open http://localhost:8000
+From the project folder run: python -m http.server 8000
+Open http://localhost:8000. The shared fragments require a local HTTP server.
 
-CONTACT FORM LIMITATION
-The form opens the visitor's default email app with a prefilled message using mailto:.
-It does not submit to a server or guarantee delivery. If you want an on-site form, connect a form provider or backend later.
+CONTACT FORM
+The contact form is deliberately not connected to an inbox, service, API or database. It copies a message locally or displays it for manual copying. Nothing is uploaded. To add a real submission flow later, first decide on the provider/backend and data-retention requirements; do not add placeholder authentication or database assumptions.
 
-CONTENT INTEGRITY
-The website avoids presenting invented client names, testimonials, performance metrics or project results as real.
-Add genuine case studies only after verifying the details and obtaining permission where needed.
-
-BEFORE PUBLISHING
-- Verify email, phone, WhatsApp and domain in config.js.
-- Check every page on desktop and mobile.
-- Test the mobile menu, search, theme toggle, contact links and form.
-- Add a real profile photo and social profile links if desired.
-- Confirm that all service descriptions and any public claims accurately reflect your current offerings.
+SECURITY
+This is a static site, not a full-stack account system. No database, API, session or authentication exists. Do not put secrets in config.js. See SECURITY.md before extending the architecture.
