@@ -959,39 +959,72 @@ img {
 }
 
 /* ==========================================================================
-   5. MY STORY (Illustrated Feature Block)
+   5. MY STORY (Card with Illustration Background)
    ========================================================================== */
-.my-story-card {
-  background: var(--bg-surface);
+.my-story-bg-card {
+  position: relative;
+  background-color: #FFFFFF;
+  background-image: url('images/my-story-bg.jpg');
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 44px 44px;
+  border-radius: var(--radius-xl, 24px);
+  padding: clamp(40px, 5.5vw, 64px) clamp(32px, 5vw, 56px);
   display: grid;
   grid-template-columns: 1.15fr 1fr;
   gap: 40px;
   align-items: center;
-  box-shadow: var(--shadow-sm);
+  min-height: 520px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Semi-transparent soft left gradient wash to ensure 100% crisp text readability across all resolutions */
+.my-story-bg-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 62%;
+  height: 100%;
+  background: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 65%, rgba(255, 255, 255, 0.92) 80%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="dark"] .my-story-bg-card {
+  background-color: #0E1A38;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] .my-story-bg-card::before {
+  background: linear-gradient(90deg, #0E1A38 0%, #0E1A38 65%, rgba(14, 26, 56, 0.92) 80%, rgba(14, 26, 56, 0.15) 100%);
 }
 
 .my-story-copy {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
+  max-width: 580px;
 }
 
 .my-story-title {
-  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  font-size: clamp(2rem, 3.8vw, 2.85rem);
   font-weight: 800;
   line-height: 1.18;
   letter-spacing: -0.03em;
   margin-top: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   color: var(--text-main);
 }
 
 .my-story-text {
   font-size: 1.05rem;
-  line-height: 1.72;
+  line-height: 1.74;
   color: var(--text-muted);
   margin-bottom: 18px;
 }
@@ -1002,7 +1035,7 @@ img {
 }
 
 .my-story-action {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .my-story-btn {
@@ -1010,78 +1043,39 @@ img {
   align-items: center;
   padding: 14px 28px;
   font-size: 1rem;
+  box-shadow: 0 6px 20px rgba(47, 91, 255, 0.35);
 }
 
-.my-story-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+.my-story-spacer {
+  min-height: 1px;
 }
 
-.my-story-img-wrap {
-  width: 100%;
-  max-width: 540px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-[data-theme="dark"] .my-story-img-wrap {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-.my-story-img-wrap:hover {
-  transform: none;
-  box-shadow: none;
-}
-
-.my-story-img {
-  width: 100%;
-  max-width: 520px;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  /* Natural 3D character drop shadow that integrates directly with page background */
-  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.14));
-  transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1), filter 0.4s ease;
-}
-
-.my-story-img:hover {
-  transform: translateY(-4px) scale(1.02);
-  filter: drop-shadow(0 22px 34px rgba(47, 91, 255, 0.22));
-}
-
-[data-theme="dark"] .my-story-img {
-  filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.55));
-}
-
-[data-theme="dark"] .my-story-img:hover {
-  filter: drop-shadow(0 24px 38px rgba(47, 91, 255, 0.35));
-}
-
-/* Tablet & Mobile Responsiveness for My Story */
+/* Tablet & Mobile Responsiveness for My Story Background Card */
 @media (max-width: 960px) {
-  .my-story-card {
+  .my-story-bg-card {
     grid-template-columns: 1fr;
-    gap: 36px;
-    padding: 34px 26px;
+    background-position: center bottom;
+    background-size: 100% auto;
+    padding: 36px 28px 360px;
+    min-height: auto;
   }
-  .my-story-visual {
-    order: -1; /* Display graphic above or keep below as desired */
+  .my-story-bg-card::before {
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 65%, rgba(255, 255, 255, 0) 100%);
+  }
+  [data-theme="dark"] .my-story-bg-card::before {
+    background: linear-gradient(180deg, #0E1A38 0%, #0E1A38 65%, rgba(14, 26, 56, 0) 100%);
+  }
+  .my-story-spacer {
+    display: none;
   }
 }
 
 @media (max-width: 640px) {
-  .my-story-card {
-    padding: 26px 18px;
-    border-radius: var(--radius-md);
+  .my-story-bg-card {
+    padding: 28px 20px 300px;
+    border-radius: var(--radius-lg);
   }
   .my-story-title {
     font-size: 1.85rem;
