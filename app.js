@@ -225,21 +225,51 @@
     });
   }
 
-  // 3. Header Scroll Glass Effect
+  // 3. Smart Shrinking Header with Scroll Progress
   function setupHeaderScroll() {
     const header = $('.site-header');
     if (!header) return;
 
-    const onScroll = () => {
-      if (window.scrollY > 20) {
+    // Ensure progress indicator exists
+    let progressBar = $('#headerScrollProgress');
+    if (!progressBar) {
+      progressBar = document.createElement('div');
+      progressBar.id = 'headerScrollProgress';
+      progressBar.className = 'header-scroll-progress';
+      progressBar.setAttribute('aria-hidden', 'true');
+      header.appendChild(progressBar);
+    }
+
+    let ticking = false;
+
+    const updateHeader = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+
+      // Shrink header smoothly when scrolled down past 25px
+      if (scrollY > 25) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
+
+      // Update reading progress bar width
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) {
+        const progress = Math.min(100, Math.max(0, (scrollY / docHeight) * 100));
+        progressBar.style.width = progress.toFixed(1) + '%';
+      }
+
+      ticking = false;
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    updateHeader();
   }
 
   // 4. Subtle Scroll Reveal (IntersectionObserver)
