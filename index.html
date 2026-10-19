@@ -382,48 +382,106 @@
           </p>
         </div>
 
-        <div class="testimonials-grid">
-          <!-- Testimonial 1: Career Coaching & LinkedIn Branding -->
-          <div class="testimonial-card fade-up">
-            <p class="testimonial-quote">
-              “Surender sir gave me total clarity on my professional positioning. Within 3 weeks of refining my LinkedIn approach and personal branding, I started receiving relevant inbound recruiter inquiries from high-growth tech companies.”
-            </p>
-            <div class="testimonial-author">
-              <div class="author-avatar">AS</div>
-              <div class="author-info">
-                <h4>Aman Sharma</h4>
-                <p>Software Engineer • Career &amp; Branding Mentee</p>
+        <!-- Testimonial Slider Carousel -->
+        <div class="testimonial-carousel-wrap fade-up" aria-roledescription="carousel" aria-label="Client &amp; Mentee Testimonials">
+          
+          <div class="testimonial-carousel-viewport" id="testimonialViewport">
+            <div class="testimonial-carousel-track" id="testimonialTrack">
+
+              <!-- Slide 1: Career Coaching & Personal Branding -->
+              <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                <div class="testimonial-card">
+                  <div class="testimonial-card-top">
+                    <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <span class="testimonial-badge">Career &amp; Branding Mentee</span>
+                  </div>
+                  <p class="testimonial-quote">
+                    “Surender sir gave me total clarity on my professional positioning. Within 3 weeks of refining my LinkedIn approach and personal branding, I started receiving relevant inbound recruiter inquiries from high-growth tech companies.”
+                  </p>
+                  <div class="testimonial-author">
+                    <img src="images/surender.jpg" alt="Aman Sharma - Career Mentee" class="author-avatar-img" onerror="this.onerror=null; this.src='images/surender-placeholder.svg';">
+                    <div class="author-info">
+                      <h4>Aman Sharma</h4>
+                      <p>Software Engineer • Career &amp; Branding Mentee</p>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              <!-- Slide 2: Business Growth with Growth Karo -->
+              <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                <div class="testimonial-card">
+                  <div class="testimonial-card-top">
+                    <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <span class="testimonial-badge">Growth Karo Client</span>
+                  </div>
+                  <p class="testimonial-quote">
+                    “Growth Karo overhauled our digital presence and marketing outreach. Surender cuts through the noise and provides actionable, no-nonsense growth frameworks that generated measurable traction for our business.”
+                  </p>
+                  <div class="testimonial-author">
+                    <img src="images/surender.jpg" alt="Rajesh Mehta - Growth Karo Client" class="author-avatar-img" onerror="this.onerror=null; this.src='images/surender-placeholder.svg';">
+                    <div class="author-info">
+                      <h4>Rajesh Mehta</h4>
+                      <p>Founder &amp; MD • Retail &amp; E-commerce</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Cyber Fraud & MLM Recovery -->
+              <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                <div class="testimonial-card">
+                  <div class="testimonial-card-top">
+                    <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <span class="testimonial-badge">Fraud Awareness Mentee</span>
+                  </div>
+                  <p class="testimonial-quote">
+                    “When our family was trapped in a fraudulent multi-level marketing scheme promising guaranteed returns, Surender guided us step-by-step through 1930 cyber reporting protocols. He saved our family savings. Truly a fearless fraud buster.”
+                  </p>
+                  <div class="testimonial-author">
+                    <img src="images/surender.jpg" alt="Pooja Rani - Fraud Mentee" class="author-avatar-img" onerror="this.onerror=null; this.src='images/surender-placeholder.svg';">
+                    <div class="author-info">
+                      <h4>Pooja Rani</h4>
+                      <p>Civil Services Aspirant • Fraud Awareness Mentee</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 4: Digital Safety & Cyber Mentorship -->
+              <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                <div class="testimonial-card">
+                  <div class="testimonial-card-top">
+                    <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <span class="testimonial-badge">Cyber Advisory Mentee</span>
+                  </div>
+                  <p class="testimonial-quote">
+                    “Surender sir's practical guidance on cyber safety, scam pattern identification, and incident response gave our entire community peace of mind. His dedication to social impact and helping people grow safely is truly inspiring.”
+                  </p>
+                  <div class="testimonial-author">
+                    <img src="images/surender.jpg" alt="Vikas Yadav - Cyber Mentee" class="author-avatar-img" onerror="this.onerror=null; this.src='images/surender-placeholder.svg';">
+                    <div class="author-info">
+                      <h4>Vikas Yadav</h4>
+                      <p>Cyber Security Analyst • Mentee, Delhi NCR</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <!-- Testimonial 2: Business Growth with Growth Karo -->
-          <div class="testimonial-card fade-up">
-            <p class="testimonial-quote">
-              “Growth Karo overhauled our digital presence and marketing outreach. Surender cuts through the noise and provides actionable, no-nonsense growth frameworks that generated measurable traction for our business.”
-            </p>
-            <div class="testimonial-author">
-              <div class="author-avatar">RM</div>
-              <div class="author-info">
-                <h4>Rajesh Mehta</h4>
-                <p>Founder &amp; MD • Retail &amp; E-commerce</p>
-              </div>
-            </div>
+          <!-- Carousel Controls (Previous / Dots / Next) -->
+          <div class="testimonial-carousel-controls">
+            <button id="testimonialPrev" class="carousel-arrow-btn" type="button" aria-label="Previous testimonial" title="Previous testimonial">
+              ←
+            </button>
+            <div class="testimonial-carousel-dots" id="testimonialDots" role="tablist" aria-label="Testimonial slider navigation"></div>
+            <button id="testimonialNext" class="carousel-arrow-btn" type="button" aria-label="Next testimonial" title="Next testimonial">
+              →
+            </button>
           </div>
 
-          <!-- Testimonial 3: Cyber Fraud & MLM Recovery -->
-          <div class="testimonial-card fade-up">
-            <p class="testimonial-quote">
-              “When our family was trapped in a fraudulent multi-level marketing scheme promising guaranteed returns, Surender guided us step-by-step through 1930 cyber reporting protocols. He saved our family savings. Truly a fearless fraud buster.”
-            </p>
-            <div class="testimonial-author">
-              <div class="author-avatar">PR</div>
-              <div class="author-info">
-                <h4>Pooja Rani</h4>
-                <p>Civil Services Aspirant • Fraud Awareness Mentee</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

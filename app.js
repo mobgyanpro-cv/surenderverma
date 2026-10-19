@@ -340,6 +340,144 @@
     window.addEventListener('orientationchange', snapToBoundary, { passive: true });
   }
 
+  // 10. Testimonial Carousel / Slider Engine (Swipe, Autoplay, Keyboard Nav)
+  function setupTestimonialCarousel() {
+    const wrap = $('.testimonial-carousel-wrap');
+    const track = $('#testimonialTrack');
+    const prevBtn = $('#testimonialPrev');
+    const nextBtn = $('#testimonialNext');
+    const dotsContainer = $('#testimonialDots');
+
+    if (!wrap || !track) return;
+
+    const slides = $$('.testimonial-slide', track);
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+    const autoPlayInterval = 5000; // 5 seconds per slide
+
+    // Create pagination dots dynamically
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.className = `carousel-dot${idx === 0 ? ' active' : ''}`;
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `Go to testimonial slide ${idx + 1}`);
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+        dot.addEventListener('click', () => {
+          goToSlide(idx);
+          restartAutoPlay();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    const dots = dotsContainer ? $$('.carousel-dot', dotsContainer) : [];
+
+    function updateSlide() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, idx) => {
+        const isActive = idx === currentIndex;
+        dot.classList.toggle('active', isActive);
+        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateSlide();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateSlide();
+    }
+
+    function goToSlide(idx) {
+      currentIndex = idx;
+      updateSlide();
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        restartAutoPlay();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        prevSlide();
+        restartAutoPlay();
+      });
+    }
+
+    // Touch Swipe Gesture Support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoPlay();
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      startAutoPlay();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+      if (Math.abs(swipeDistance) > 40) {
+        if (swipeDistance < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+
+    // Keyboard Arrow navigation when focused
+    wrap.setAttribute('tabindex', '0');
+    wrap.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+        restartAutoPlay();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+        restartAutoPlay();
+      }
+    });
+
+    // Auto-play management
+    function startAutoPlay() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      autoPlayTimer = setInterval(nextSlide, autoPlayInterval);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+    }
+
+    function restartAutoPlay() {
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    wrap.addEventListener('mouseenter', stopAutoPlay);
+    wrap.addEventListener('mouseleave', startAutoPlay);
+
+    // Start auto-play initially
+    startAutoPlay();
+  }
+
   // Initialize all modules when DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
     setupViewportFit();
@@ -351,5 +489,6 @@
     setupImageFallbacks();
     highlightCurrentPage();
     setupContactForm();
+    setupTestimonialCarousel();
   });
 })();
