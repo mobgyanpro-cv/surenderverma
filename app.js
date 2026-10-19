@@ -381,33 +381,15 @@
     const dots = dotsContainer ? $$('.carousel-dot', dotsContainer) : [];
 
     function updateSlide() {
-      // Calculate exact offset so current active slide is centered inside the viewport
-      const activeSlide = slides[currentIndex];
-      if (activeSlide && viewport) {
-        const slideOffset = activeSlide.offsetLeft;
-        const slideWidth = activeSlide.offsetWidth;
-        const viewportWidth = viewport.offsetWidth;
-        const targetTranslateX = slideOffset - (viewportWidth / 2) + (slideWidth / 2);
-        track.style.transform = `translateX(-${Math.max(0, targetTranslateX)}px)`;
-      } else {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      }
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-      // Toggle active-slide class (blur/scale on background cards, pop-up on active card)
       slides.forEach((slide, idx) => {
         const isActive = idx === currentIndex;
         slide.classList.toggle('active-slide', isActive);
         slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
       });
 
-      // Update dots
-      dots.forEach((dot, idx) => {
-        const isActive = idx === currentIndex;
-        dot.classList.toggle('active', isActive);
-        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      });
-
-      // Update counter (e.g. "01" / "20")
+      // Update counter (e.g. "01 / 20")
       if (counterNum) {
         counterNum.textContent = String(currentIndex + 1).padStart(2, '0');
       }
@@ -501,114 +483,9 @@
     wrap.addEventListener('mouseenter', stopAutoPlay);
     wrap.addEventListener('mouseleave', startAutoPlay);
 
-    // Window resize adjustment
-    window.addEventListener('resize', () => {
-      updateSlide();
-    }, { passive: true });
-
     // Initial positioning
-    setTimeout(updateSlide, 50);
+    updateSlide();
     startAutoPlay();
-  }
-
-  // 11. Hero Portrait Slider Engine (Auto-Rotate & Dual Showcase)
-  function setupHeroPortraitSlider() {
-    const slider = $('#heroPortraitSlider');
-    if (!slider) return;
-
-    const slides = $$('.portrait-slide', slider);
-    if (!slides.length) return;
-
-    const prevBtn = $('#portraitPrev');
-    const nextBtn = $('#portraitNext');
-    const dots = $$('.p-dot', slider);
-    const chipTitle = $('#portraitChipTitle');
-    const chipSub = $('#portraitChipSub');
-
-    let currentPortraitIndex = 0;
-    let portraitTimer = null;
-    const rotateInterval = 4000; // 4 seconds per portrait
-
-    function showPortrait(idx) {
-      currentPortraitIndex = (idx + slides.length) % slides.length;
-
-      slides.forEach((slide, i) => {
-        const isActive = i === currentPortraitIndex;
-        slide.classList.toggle('active-portrait', isActive);
-      });
-
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentPortraitIndex);
-      });
-
-      const currentSlide = slides[currentPortraitIndex];
-      if (currentSlide && chipTitle && chipSub) {
-        chipTitle.style.opacity = '0';
-        chipSub.style.opacity = '0';
-        setTimeout(() => {
-          chipTitle.textContent = currentSlide.getAttribute('data-chip-title') || 'Founder & Cyber Consultant';
-          chipSub.textContent = currentSlide.getAttribute('data-chip-sub') || 'Open for coaching calls & advisory';
-          chipTitle.style.opacity = '1';
-          chipSub.style.opacity = '1';
-        }, 200);
-      }
-    }
-
-    function nextPortrait() {
-      showPortrait(currentPortraitIndex + 1);
-    }
-
-    function prevPortrait() {
-      showPortrait(currentPortraitIndex - 1);
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        nextPortrait();
-        restartPortraitTimer();
-      });
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        prevPortrait();
-        restartPortraitTimer();
-      });
-    }
-
-    dots.forEach(dot => {
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const targetIndex = parseInt(dot.getAttribute('data-index') || '0', 10);
-        showPortrait(targetIndex);
-        restartPortraitTimer();
-      });
-    });
-
-    function startPortraitTimer() {
-      if (portraitTimer) clearInterval(portraitTimer);
-      portraitTimer = setInterval(nextPortrait, rotateInterval);
-    }
-
-    function stopPortraitTimer() {
-      if (portraitTimer) {
-        clearInterval(portraitTimer);
-        portraitTimer = null;
-      }
-    }
-
-    function restartPortraitTimer() {
-      stopPortraitTimer();
-      startPortraitTimer();
-    }
-
-    slider.addEventListener('mouseenter', stopPortraitTimer);
-    slider.addEventListener('mouseleave', startPortraitTimer);
-
-    // Initial launch
-    startPortraitTimer();
   }
 
   // Initialize all modules when DOM is ready
@@ -623,6 +500,5 @@
     highlightCurrentPage();
     setupContactForm();
     setupTestimonialCarousel();
-    setupHeroPortraitSlider();
   });
 })();
