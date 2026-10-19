@@ -12,9 +12,9 @@ const SITE = {
   tagline: 'Cyber security consultant, career coach and founder helping people grow safely.',
   location: 'Sirsa, Haryana, India',
 
-  // Main Call to Action
+  // Main Call to Action (Calendly 1-on-1 Consultation)
   cta: 'Book a call',
-  meetingLink: 'contact.html',
+  meetingLink: 'https://calendly.com/bizsocialsurender/30min',
 
   // Contact Information
   email: 'Bizsocialsurender@gmail.com',
@@ -30,11 +30,13 @@ const SITE = {
   growthKaro: 'https://growthkaro.com',
   website: 'https://surenderverma.cv',
 
-  // Social Stats (Accurate facts provided by user)
+  // Social Stats (Accurate verified numbers provided by Surender Verma)
   stats: {
-    followers: '11,700+',
-    connections: '500+',
-    stories: '100+'
+    followers: '10,000+',     // LinkedIn Followers
+    mlmFraud: '700+',         // Solved Network Marketing Fraud Cases
+    moneyFraud: '100+',       // Mobile & Money Fraud Interventions
+    experience: '6+ Years',   // Fraud Fighting & Advisory Experience
+    stories: '100+'           // Guided Mentees & Success Stories
   },
 
   // Dynamic Year

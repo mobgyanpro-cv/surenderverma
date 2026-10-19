@@ -77,9 +77,19 @@
     });
 
     // Credibility Stats (Update all matching elements across entire page)
+    // Credibility Stats (Update all matching elements across entire page)
     if (SITE.stats) {
       if (SITE.stats.followers) {
         $$('[data-stat="followers"]').forEach(el => { el.textContent = SITE.stats.followers; });
+      }
+      if (SITE.stats.mlmFraud) {
+        $$('[data-stat="mlmFraud"]').forEach(el => { el.textContent = SITE.stats.mlmFraud; });
+      }
+      if (SITE.stats.moneyFraud) {
+        $$('[data-stat="moneyFraud"]').forEach(el => { el.textContent = SITE.stats.moneyFraud; });
+      }
+      if (SITE.stats.experience) {
+        $$('[data-stat="experience"]').forEach(el => { el.textContent = SITE.stats.experience; });
       }
       if (SITE.stats.connections) {
         $$('[data-stat="connections"]').forEach(el => { el.textContent = SITE.stats.connections; });
@@ -89,9 +99,14 @@
       }
     }
 
-    // CTA links
+    // CTA links (Calendly or Contact Page)
     $$('[data-cta-link]').forEach(el => {
-      el.href = SITE.meetingLink || 'contact.html';
+      const link = SITE.meetingLink || 'https://calendly.com/bizsocialsurender/30min';
+      el.href = link;
+      if (link.startsWith('http')) {
+        el.target = '_blank';
+        el.rel = 'noopener noreferrer';
+      }
       if (!el.textContent.trim()) {
         el.textContent = SITE.cta || 'Book a call';
       }
