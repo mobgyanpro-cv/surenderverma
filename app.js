@@ -511,6 +511,106 @@
     startAutoPlay();
   }
 
+  // 11. Hero Portrait Slider Engine (Auto-Rotate & Dual Showcase)
+  function setupHeroPortraitSlider() {
+    const slider = $('#heroPortraitSlider');
+    if (!slider) return;
+
+    const slides = $$('.portrait-slide', slider);
+    if (!slides.length) return;
+
+    const prevBtn = $('#portraitPrev');
+    const nextBtn = $('#portraitNext');
+    const dots = $$('.p-dot', slider);
+    const chipTitle = $('#portraitChipTitle');
+    const chipSub = $('#portraitChipSub');
+
+    let currentPortraitIndex = 0;
+    let portraitTimer = null;
+    const rotateInterval = 4000; // 4 seconds per portrait
+
+    function showPortrait(idx) {
+      currentPortraitIndex = (idx + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => {
+        const isActive = i === currentPortraitIndex;
+        slide.classList.toggle('active-portrait', isActive);
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentPortraitIndex);
+      });
+
+      const currentSlide = slides[currentPortraitIndex];
+      if (currentSlide && chipTitle && chipSub) {
+        chipTitle.style.opacity = '0';
+        chipSub.style.opacity = '0';
+        setTimeout(() => {
+          chipTitle.textContent = currentSlide.getAttribute('data-chip-title') || 'Founder & Cyber Consultant';
+          chipSub.textContent = currentSlide.getAttribute('data-chip-sub') || 'Open for coaching calls & advisory';
+          chipTitle.style.opacity = '1';
+          chipSub.style.opacity = '1';
+        }, 200);
+      }
+    }
+
+    function nextPortrait() {
+      showPortrait(currentPortraitIndex + 1);
+    }
+
+    function prevPortrait() {
+      showPortrait(currentPortraitIndex - 1);
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextPortrait();
+        restartPortraitTimer();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevPortrait();
+        restartPortraitTimer();
+      });
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetIndex = parseInt(dot.getAttribute('data-index') || '0', 10);
+        showPortrait(targetIndex);
+        restartPortraitTimer();
+      });
+    });
+
+    function startPortraitTimer() {
+      if (portraitTimer) clearInterval(portraitTimer);
+      portraitTimer = setInterval(nextPortrait, rotateInterval);
+    }
+
+    function stopPortraitTimer() {
+      if (portraitTimer) {
+        clearInterval(portraitTimer);
+        portraitTimer = null;
+      }
+    }
+
+    function restartPortraitTimer() {
+      stopPortraitTimer();
+      startPortraitTimer();
+    }
+
+    slider.addEventListener('mouseenter', stopPortraitTimer);
+    slider.addEventListener('mouseleave', startPortraitTimer);
+
+    // Initial launch
+    startPortraitTimer();
+  }
+
   // Initialize all modules when DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
     setupViewportFit();
@@ -523,5 +623,6 @@
     highlightCurrentPage();
     setupContactForm();
     setupTestimonialCarousel();
+    setupHeroPortraitSlider();
   });
 })();

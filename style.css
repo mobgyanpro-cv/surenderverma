@@ -774,7 +774,37 @@ img {
   overflow: hidden;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 
+    -12px 18px 38px rgba(255, 255, 255, 0.08),
+    0 24px 50px rgba(0, 0, 0, 0.18);
+  user-select: none;
+}
+
+/* Portrait Slider Track */
+.portrait-slider-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.portrait-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(1.04);
+}
+
+.portrait-slide.active-portrait {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 2;
 }
 
 .hero-portrait-img {
@@ -783,11 +813,88 @@ img {
   object-fit: cover;
   object-position: center top;
   display: block;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
 .hero-portrait-card:hover .hero-portrait-img {
-  transform: scale(1.02);
+  transform: scale(1.03);
+}
+
+/* Quick Navigation Arrows */
+.portrait-nav-arrows {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.portrait-arrow-btn {
+  pointer-events: auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(11, 27, 58, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.hero-portrait-card:hover .portrait-arrow-btn {
+  opacity: 0.95;
+  transform: scale(1);
+}
+
+.portrait-arrow-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: scale(1.12) !important;
+}
+
+/* Portrait Progress Indicators */
+.portrait-indicators {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+  padding: 4px 8px;
+  background: rgba(11, 27, 58, 0.6);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.p-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.p-dot.active {
+  width: 20px;
+  background: var(--color-primary);
+  box-shadow: 0 0 8px rgba(47, 91, 255, 0.8);
 }
 
 .hero-status-chip {
@@ -807,6 +914,19 @@ img {
   box-shadow: var(--shadow-md);
   box-sizing: border-box;
   overflow: hidden;
+  z-index: 4;
+}
+
+[data-theme="dark"] .hero-status-chip {
+  background: rgba(15, 28, 59, 0.92);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .hero-portrait-card {
+  box-shadow: 
+    -12px 18px 40px rgba(255, 255, 255, 0.05),
+    0 24px 55px rgba(0, 0, 0, 0.65);
 }
 
 .hero-status-chip > div:last-child {
@@ -820,6 +940,13 @@ img {
   border-radius: 50%;
   background-color: var(--color-success);
   flex-shrink: 0;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .chip-text {
@@ -828,12 +955,14 @@ img {
   color: var(--text-main);
   font-weight: var(--font-weight-bold);
   overflow-wrap: break-word;
+  transition: opacity 0.3s ease;
 }
 .chip-sub {
   font-size: 0.74rem;
   color: var(--text-muted);
   font-weight: var(--font-weight-regular);
   overflow-wrap: break-word;
+  transition: opacity 0.3s ease;
 }
 
 /* ==========================================================================

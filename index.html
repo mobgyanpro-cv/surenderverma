@@ -167,25 +167,57 @@
             </div>
           </div>
 
-          <!-- Hero Portrait Slot (Prominent Slot for images/surender.jpg with clean fallback) -->
+          <!-- Hero Portrait Slider (Auto-Rotating & Interactive Dual-Portrait Showcase) -->
           <div class="hero-media fade-up">
-            <div class="hero-portrait-card">
-              <!-- PLACEHOLDER: Put your real portrait photo at images/surender.jpg -->
-              <img 
-                src="images/surender.jpg" 
-                alt="Surender Verma - Cyber Security Consultant and Career Coach"
-                class="hero-portrait-img"
-                width="420"
-                height="504"
-                onerror="this.onerror=null; this.src='images/surender-placeholder.svg';"
-              >
+            <div class="hero-portrait-card" id="heroPortraitSlider">
+              
+              <!-- Track / Slides -->
+              <div class="portrait-slider-track" id="portraitTrack">
+                <!-- Slide 1: Formal Suit Portrait -->
+                <div class="portrait-slide active-portrait" data-chip-title="Founder &amp; Cyber Consultant" data-chip-sub="Open for coaching calls &amp; advisory">
+                  <img 
+                    src="images/surender-suit.jpg" 
+                    alt="Surender Verma - Founder &amp; Cyber Security Consultant"
+                    class="hero-portrait-img"
+                    width="420"
+                    height="504"
+                    onerror="this.onerror=null; this.src='images/surender.jpg';"
+                  >
+                </div>
+                <!-- Slide 2: Modern Executive Portrait -->
+                <div class="portrait-slide" data-chip-title="Growth Karo &amp; Fraud Free Bharat" data-chip-sub="Personal Branding &amp; Fraud Investigation">
+                  <img 
+                    src="images/surender-blue.jpg" 
+                    alt="Surender Verma - Career Coach and Fraud Buster"
+                    class="hero-portrait-img"
+                    width="420"
+                    height="504"
+                    onerror="this.onerror=null; this.src='images/surender.jpg';"
+                  >
+                </div>
+              </div>
+
+              <!-- Quick Switcher Arrows -->
+              <div class="portrait-nav-arrows">
+                <button class="portrait-arrow-btn" id="portraitPrev" type="button" aria-label="Previous photo">‹</button>
+                <button class="portrait-arrow-btn" id="portraitNext" type="button" aria-label="Next photo">›</button>
+              </div>
+
+              <!-- Portrait Progress Indicator Bar -->
+              <div class="portrait-indicators" id="portraitDots">
+                <span class="p-dot active" data-index="0"></span>
+                <span class="p-dot" data-index="1"></span>
+              </div>
+
+              <!-- Dynamic Status Chip -->
               <div class="hero-status-chip">
                 <div class="chip-dot"></div>
                 <div>
-                  <div class="chip-text">Founder &amp; Cyber Consultant</div>
-                  <div class="chip-sub">Open for coaching calls &amp; advisory</div>
+                  <div class="chip-text" id="portraitChipTitle">Founder &amp; Cyber Consultant</div>
+                  <div class="chip-sub" id="portraitChipSub">Open for coaching calls &amp; advisory</div>
                 </div>
               </div>
+
             </div>
           </div>
 
