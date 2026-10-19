@@ -300,8 +300,34 @@
     });
   }
 
+  // 9. Viewport Fit & Zoom Boundary Lock (Snaps to 100% with zero blank margins)
+  function setupViewportFit() {
+    const snapToBoundary = () => {
+      if (window.scrollX !== 0) {
+        window.scrollTo(0, window.scrollY);
+      }
+    };
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        if (window.visualViewport.scale <= 1.01) {
+          snapToBoundary();
+        }
+      });
+      window.visualViewport.addEventListener('scroll', () => {
+        if (window.visualViewport.scale <= 1.01 && window.scrollX !== 0) {
+          snapToBoundary();
+        }
+      });
+    }
+
+    window.addEventListener('resize', snapToBoundary, { passive: true });
+    window.addEventListener('orientationchange', snapToBoundary, { passive: true });
+  }
+
   // Initialize all modules when DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
+    setupViewportFit();
     setupTheme();
     hydrateSiteData();
     setupMobileNav();
