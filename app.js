@@ -126,7 +126,15 @@
       backdrop.id = 'mobileNavBackdrop';
       backdrop.className = 'mobile-nav-backdrop';
       backdrop.setAttribute('aria-hidden', 'true');
+    }
+
+    // CRITICAL: Ensure drawer & backdrop are attached directly to document.body!
+    // This prevents any parent sticky/backdrop-filter context (like .site-header) from breaking position:fixed.
+    if (backdrop.parentElement !== document.body) {
       document.body.appendChild(backdrop);
+    }
+    if (drawer.parentElement !== document.body) {
+      document.body.appendChild(drawer);
     }
 
     const closeBtn = $('#mobileNavClose');
@@ -168,6 +176,11 @@
     }
 
     backdrop.addEventListener('click', closeDrawer);
+
+    // Prevent background scrolling through the backdrop on touch devices
+    backdrop.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+    }, { passive: false });
 
     // Close when clicking ANY link or CTA button inside mobile drawer
     $$('a', drawer).forEach(link => {
@@ -243,6 +256,12 @@
     let ticking = false;
 
     const updateHeader = () => {
+      // Do not alter header state while mobile drawer is actively open
+      if (document.body.classList.contains('drawer-open')) {
+        ticking = false;
+        return;
+      }
+
       const scrollY = window.scrollY || document.documentElement.scrollTop;
 
       // Shrink header smoothly when scrolled down past 25px

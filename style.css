@@ -522,7 +522,6 @@ img {
   transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
 }
 
 .site-header.scrolled {
@@ -783,14 +782,17 @@ img {
 
 /* Mobile Scroll Lock */
 body.drawer-open {
-  overflow: hidden !important;
-  touch-action: none;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 /* Mobile Backdrop Overlay */
 .mobile-nav-backdrop {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   background: rgba(10, 15, 30, 0.65);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -798,7 +800,8 @@ body.drawer-open {
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
-  z-index: 1000;
+  z-index: 9998;
+  touch-action: none;
 }
 
 .mobile-nav-backdrop.open {
@@ -819,13 +822,14 @@ body.drawer-open {
   background-color: var(--bg-surface);
   border-left: 1px solid var(--border-color);
   box-shadow: -15px 0 45px rgba(0, 0, 0, 0.25);
-  z-index: 1001;
+  z-index: 9999;
   transform: translateX(105%);
   transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.38s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+  overscroll-behavior: contain;
   padding: 0;
 }
 
@@ -926,6 +930,7 @@ body.drawer-open {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   padding: 18px 16px 20px;
   display: flex;
   flex-direction: column;
