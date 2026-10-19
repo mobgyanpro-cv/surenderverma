@@ -353,9 +353,12 @@
     const slides = $$('.testimonial-slide', track);
     if (!slides.length) return;
 
+    const counterNum = $('#testimonialCurrentNum');
+    const viewport = $('#testimonialViewport');
+
     let currentIndex = 0;
     let autoPlayTimer = null;
-    const autoPlayInterval = 5000; // 5 seconds per slide
+    const autoPlayInterval = 4500; // 4.5 seconds auto-scroll
 
     // Create pagination dots dynamically
     if (dotsContainer) {
@@ -378,12 +381,36 @@
     const dots = dotsContainer ? $$('.carousel-dot', dotsContainer) : [];
 
     function updateSlide() {
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      // Calculate exact offset so current active slide is centered inside the viewport
+      const activeSlide = slides[currentIndex];
+      if (activeSlide && viewport) {
+        const slideOffset = activeSlide.offsetLeft;
+        const slideWidth = activeSlide.offsetWidth;
+        const viewportWidth = viewport.offsetWidth;
+        const targetTranslateX = slideOffset - (viewportWidth / 2) + (slideWidth / 2);
+        track.style.transform = `translateX(-${Math.max(0, targetTranslateX)}px)`;
+      } else {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+
+      // Toggle active-slide class (blur/scale on background cards, pop-up on active card)
+      slides.forEach((slide, idx) => {
+        const isActive = idx === currentIndex;
+        slide.classList.toggle('active-slide', isActive);
+        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+
+      // Update dots
       dots.forEach((dot, idx) => {
         const isActive = idx === currentIndex;
         dot.classList.toggle('active', isActive);
         dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
+
+      // Update counter (e.g. "01" / "20")
+      if (counterNum) {
+        counterNum.textContent = String(currentIndex + 1).padStart(2, '0');
+      }
     }
 
     function nextSlide() {
@@ -453,7 +480,7 @@
       }
     });
 
-    // Auto-play management
+    // Auto-scroll management
     function startAutoPlay() {
       if (autoPlayTimer) clearInterval(autoPlayTimer);
       autoPlayTimer = setInterval(nextSlide, autoPlayInterval);
@@ -474,7 +501,13 @@
     wrap.addEventListener('mouseenter', stopAutoPlay);
     wrap.addEventListener('mouseleave', startAutoPlay);
 
-    // Start auto-play initially
+    // Window resize adjustment
+    window.addEventListener('resize', () => {
+      updateSlide();
+    }, { passive: true });
+
+    // Initial positioning
+    setTimeout(updateSlide, 50);
     startAutoPlay();
   }
 
