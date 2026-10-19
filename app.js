@@ -113,42 +113,113 @@
     });
   }
 
-  // 2. Mobile Navigation Toggle & Drawer
+  // 2. Mobile Navigation Toggle & Slide-out Drawer
   function setupMobileNav() {
     const toggleBtn = $('#mobileNavToggle');
     const drawer = $('#mobileNavDrawer');
     if (!toggleBtn || !drawer) return;
 
-    const closeDrawer = () => {
-      drawer.classList.remove('open');
-      document.body.classList.remove('drawer-open');
-      toggleBtn.setAttribute('aria-expanded', 'false');
-      toggleBtn.textContent = '☰';
+    // Ensure backdrop exists
+    let backdrop = $('#mobileNavBackdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.id = 'mobileNavBackdrop';
+      backdrop.className = 'mobile-nav-backdrop';
+      backdrop.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(backdrop);
+    }
+
+    const closeBtn = $('#mobileNavClose');
+
+    const openDrawer = () => {
+      drawer.classList.add('open');
+      backdrop.classList.add('open');
+      document.body.classList.add('drawer-open');
+      toggleBtn.classList.add('is-active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
     };
 
-    toggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = drawer.classList.toggle('open');
-      document.body.classList.toggle('drawer-open', isOpen);
-      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      toggleBtn.textContent = isOpen ? '✕' : '☰';
-    });
+    const closeDrawer = () => {
+      drawer.classList.remove('open');
+      backdrop.classList.remove('open');
+      document.body.classList.remove('drawer-open');
+      toggleBtn.classList.remove('is-active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+    };
 
-    // Close when clicking ANY link or button inside mobile drawer
-    $$('a', drawer).forEach(link => {
-      link.addEventListener('click', closeDrawer);
-    });
-
-    // Close when clicking outside drawer
-    document.addEventListener('click', (e) => {
-      if (drawer.classList.contains('open') && !drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+    const toggleDrawer = (e) => {
+      if (e) e.stopPropagation();
+      if (drawer.classList.contains('open')) {
         closeDrawer();
+      } else {
+        openDrawer();
       }
+    };
+
+    toggleBtn.addEventListener('click', toggleDrawer);
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeDrawer();
+      });
+    }
+
+    backdrop.addEventListener('click', closeDrawer);
+
+    // Close when clicking ANY link or CTA button inside mobile drawer
+    $$('a', drawer).forEach(link => {
+      link.addEventListener('click', () => {
+        // slight timeout so the navigation starts smoothly
+        setTimeout(closeDrawer, 120);
+      });
     });
 
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
+
+    // Touch Swipe-to-Close gesture for mobile devices
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchCurrentX = 0;
+
+    drawer.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchCurrentX = touchStartX;
+    }, { passive: true });
+
+    drawer.addEventListener('touchmove', (e) => {
+      touchCurrentX = e.touches[0].clientX;
+    }, { passive: true });
+
+    drawer.addEventListener('touchend', (e) => {
+      const diffX = touchCurrentX - touchStartX;
+      const diffY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+      // If user swiped right by more than 50px without excessive vertical movement
+      if (diffX > 50 && diffY < 85) {
+        closeDrawer();
+      }
+    }, { passive: true });
+
+    // Highlight active link based on current page
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    $$('.drawer-link, .mobile-nav-link', drawer).forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && (href === currentPage || (currentPage === '' && href === 'index.html'))) {
+        link.classList.add('active');
+      }
+    });
+
+    // Auto-close if screen resized to desktop size
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1100 && drawer.classList.contains('open')) {
         closeDrawer();
       }
     });
