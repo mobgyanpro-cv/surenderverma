@@ -30,9 +30,7 @@ const SITE = {
 
   // Social Profiles
   username: 'Socialsurender',
-  instagramUsername: 'social_surender',
   linkedin: 'https://linkedin.com/in/Socialsurender',
-  instagram: 'https://instagram.com/social_surender',
   website: 'https://surenderverma.cv',
 
   // Verified Cybersecurity Track Record

@@ -14,7 +14,7 @@
 - awareness.html -> Fraud Awareness & Cyber Safety Guide: Common scams, warning
                     signs, emergency action plan, and official 1930 / cybercrime.gov.in details.
 - contact.html   -> Direct contact page: responsive 2-column layout, WhatsApp,
-                    LinkedIn, Instagram, email cards, and WhatsApp-integrated inquiry form.
+                    LinkedIn, email cards, and WhatsApp-integrated inquiry form.
 - work.html      -> Instant redirect to services.html.
 
 2. HOW TO UPDATE YOUR DETAILS
@@ -26,7 +26,6 @@ Open "config.js" to edit:
   - email       : Bizsocialsurender@gmail.com
   - whatsapp    : 919817242747 (Display: +91 98172 42747)
   - linkedin    : https://linkedin.com/in/Socialsurender (@Socialsurender)
-  - instagram   : https://instagram.com/social_surender (@social_surender)
   - growthKaro  : https://growthkaro.com
   - stats       : Followers (11,700+), Connections (500+), Stories (100+)
 

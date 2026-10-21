@@ -18,7 +18,7 @@ A clean, calm, and trustworthy personal brand website for **Surender Verma** (Si
 ├── about.html        # About Surender (Bio, Sirsa roots, timeline milestones, IGNOU education, core values, civil volunteering)
 ├── services.html     # Work With Me (Career coaching, personal branding, Growth Karo, cyber defense, 3-step process, FAQ)
 ├── awareness.html    # Fraud Awareness & Safety Guide (Common scams, warning signs, emergency action plan, official 1930 / cybercrime.gov.in details)
-├── contact.html      # Contact (Direct WhatsApp, LinkedIn, Instagram, email cards, responsive 2-column layout, inquiry form)
+├── contact.html      # Contact (Direct WhatsApp, LinkedIn, email cards, responsive 2-column layout, inquiry form)
 ├── work.html         # Canonical redirect to services.html
 ├── style.css         # Complete design system tokens, responsive utilities, WCAG-compliant contrasts
 ├── app.js            # Lightweight vanilla JS for hydration, active nav, mobile drawer, scroll header, and image fallback

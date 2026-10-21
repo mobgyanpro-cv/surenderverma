@@ -59,12 +59,6 @@
           el.target = '_blank';
           el.rel = 'noopener noreferrer';
         }
-      } else if (type === 'instagram' && SITE.instagram) {
-        if (isAnchor) {
-          el.href = SITE.instagram;
-          el.target = '_blank';
-          el.rel = 'noopener noreferrer';
-        }
       } else if (type === 'year') {
         el.textContent = SITE.year || new Date().getFullYear();
       }
