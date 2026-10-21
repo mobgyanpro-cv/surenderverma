@@ -4089,10 +4089,40 @@ textarea:focus {
   box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.4);
 }
 
+.floating-badge-top-left {
+  top: 24px;
+  left: -14px;
+  animation-delay: 0s;
+}
+
 .floating-badge-top-right {
-  top: 18px;
-  right: -12px;
-  animation-delay: 0.5s;
+  top: 52px;
+  right: -16px;
+  animation-delay: 0.7s;
+}
+
+.floating-badge-bottom-left {
+  bottom: 74px;
+  left: -14px;
+  animation-delay: 1.4s;
+}
+
+@media (max-width: 640px) {
+  .floating-badge-bottom-left {
+    display: none;
+  }
+  .floating-badge-top-left {
+    left: 4px;
+    top: 12px;
+    padding: 6px 12px;
+    font-size: 0.76rem;
+  }
+  .floating-badge-top-right {
+    right: 4px;
+    top: 48px;
+    padding: 6px 12px;
+    font-size: 0.76rem;
+  }
 }
 
 @keyframes floatBadge {
