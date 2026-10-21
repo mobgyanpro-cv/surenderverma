@@ -1,39 +1,44 @@
-# Surender Verma — Personal Brand Website (surenderverma.cv)
+# Surender Verma — Personal Portfolio Website (surenderverma.cv)
 
-A clean, calm, and trustworthy personal brand website for **Surender Verma** (Sirsa, Haryana, India) — Founder & CEO at Growth Karo, Cyber Security Consultant, AI & Career Coach, and Social Worker / "Fraud Buster".
+A high-performance personal portfolio website for **Surender Verma** (Sirsa, Haryana, India) — Digital Builder, Technologist, and Cybersecurity Practitioner active since 2019.
 
-## Core Principles & Design System
-- **60-30-10 Color System**:
-  - `60%`: `#F7F9FC` (calm, spacious background)
-  - `30%`: `#FFFFFF` surfaces, `#0B1B3A` text, `#5B6B85` muted text, `#E3E9F4` borders, and `#0B1B3A` dark testimonials section
-  - `10%`: `#2F5BFF` primary buttons & links, `#FFB547` amber fraud highlights, `#12B886` success green
-- **Typography**: Strictly **Poppins** Google Font with max two weights (`400` Regular and `600` Bold), tight heading letter-spacing (`-0.03em`), and line-height `1.68`.
-- **Subtle Motion**: Smooth scroll reveals (`.fade-up` with `IntersectionObserver`). No heavy canvas particles, no 3D tilts, no marquees. Fully respects `prefers-reduced-motion`.
-- **Single Primary Button Style**: `.btn-primary` with `#2F5BFF`.
-- **Centralized Config**: Contact details, WhatsApp, LinkedIn, email, and location live only in `config.js`.
+## Core Identity & Positioning
+- **Digital Builder & Technologist**: Fast, zero-bloat modern websites and digital experiences.
+- **Next-Gen AI Video Studio**: Viral 9:16 reels, brand commercials, and custom talking avatars.
+- **Google My Business Setup**: Complete verified Maps optimization, review generation, and local SEO.
+- **Digital Safety Mission**: Pre-footer community authority helping 870+ victims navigate scams, MLMs, and malware for free.
+
+## Tech Stack & Architecture
+- **Semantic HTML5 & Modular CSS**: Sub-100ms load time, 100/100 Lighthouse performance.
+- **Zero External Dependencies**: Pure vanilla JavaScript (`app.js`), no heavy frameworks or runtime bloat.
+- **Native Dark/Light Theme**: Instant theme switching with zero flash of unstyled content (`localStorage` + media query).
+- **Centralized Configuration**: All contact info, stats, and links live in `config.js`.
 
 ## Site Structure
 ```text
-├── index.html        # Home (Hero with portrait, credibility strip, expertise cards, bio, Growth Karo, Fraud Buster, testimonials, final CTA)
-├── about.html        # About Surender (Bio, Sirsa roots, timeline milestones, IGNOU education, core values, civil volunteering)
-├── services.html     # Work With Me (Career coaching, personal branding, Growth Karo, cyber defense, 3-step process, FAQ)
-├── awareness.html    # Fraud Awareness & Safety Guide (Common scams, warning signs, emergency action plan, official 1930 / cybercrime.gov.in details)
-├── contact.html      # Contact (Direct WhatsApp, LinkedIn, email cards, responsive 2-column layout, inquiry form)
-├── work.html         # Canonical redirect to services.html
-├── style.css         # Complete design system tokens, responsive utilities, WCAG-compliant contrasts
-├── app.js            # Lightweight vanilla JS for hydration, active nav, mobile drawer, scroll header, and image fallback
-├── config.js         # Centralized personal brand configuration
-├── header.html       # Source header partial
-├── footer.html       # Source footer partial
+├── index.html                 # Homepage (Hero with micro-badges, portfolio preview, services, journey, digital safety mission, quick booking)
+├── portfolio.html             # Dedicated Full Portfolio (Web development, AI video studio, GMB showcase)
+├── web-development.html       # Commercial Service: High-Performance Web Development
+├── gmb-setup.html             # Commercial Service: Google My Business & Local SEO
+├── ai-video-production.html   # Commercial Service: Next-Gen AI Video Studio
+├── digital-safety.html        # Community Impact: Cyber Fraud Triage & Free Guidance (870+ cases)
+├── about.html                 # Full Story & Background (Since 2019, Gurugram, freelance evolution)
+├── services.html              # Commercial Offerings & Pricing Scope Overview
+├── contact.html               # Direct Contact (WhatsApp, Calendly 15-min scheduler, email)
+├── style.css                  # Lightweight design system, responsive tokens, dark/light themes
+├── app.js                     # Zero-dependency progressive enhancement engine
+├── config.js                  # Centralized configuration & site metadata
 ├── images/
-│   ├── surender.jpg              # Executive portrait image (replaceable with user photo)
-│   ├── surender-placeholder.svg  # Elegant vector fallback avatar (zero developer text)
-│   ├── og-image.png              # High-res 1200x630 social share preview card (WhatsApp, LinkedIn, Twitter)
-│   └── apple-touch-icon.png      # 180x180 Apple Touch Icon for iOS home screens
-├── sitemap.xml       # Canonical XML sitemap
-├── robots.txt        # Web crawler configuration
-└── HOW-TO-EDIT.txt   # Step-by-step editing and hosting guide
+│   ├── surender-blue.jpg      # Hero portrait
+│   ├── surender.jpg           # Profile avatar
+│   ├── my-story-artwork.jpg   # Journey narrative visual
+│   ├── surender-placeholder.svg # Vector fallback
+│   ├── og-image.png           # 1200x630 social share preview card
+│   └── apple-touch-icon.png   # 180x180 iOS touch icon
+├── sitemap.xml                # Canonical XML sitemap
+├── robots.txt                 # Search engine crawler configuration
+└── HOW-TO-EDIT.txt            # Step-by-step editing and hosting guide
 ```
 
 ## Quick Deployment
-Upload all files directly to **Vercel**, **Netlify**, **GitHub Pages**, or any standard cPanel web host (`public_html`). Pure static HTML/CSS/JS with zero dependencies and no build steps.
+Upload all files directly to **Vercel**, **Netlify**, **Cloudflare Pages**, **GitHub Pages**, or standard cPanel web hosting (`public_html`). Pure static HTML/CSS/JS with zero build steps required.

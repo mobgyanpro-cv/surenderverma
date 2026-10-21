@@ -382,10 +382,10 @@
 
     const allLinks = $$('.nav-link, .mobile-nav-link');
     allLinks.forEach(link => {
-      link.classList.remove('active');
-      link.removeAttribute('aria-current');
+      const rawHref = link.getAttribute('href') || '';
+      if (rawHref.includes('#')) return; // Ignore in-page section anchors
       
-      const href = (link.getAttribute('href') || '').toLowerCase().split('?')[0].split('#')[0];
+      const href = rawHref.toLowerCase().split('?')[0];
       if (href === currentPath) {
         link.classList.add('active');
         link.setAttribute('aria-current', 'page');

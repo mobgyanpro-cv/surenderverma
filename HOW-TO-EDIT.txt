@@ -2,55 +2,50 @@
   SURENDER VERMA (surenderverma.cv) — WEBSITE GUIDE & HOW TO EDIT
 ================================================================================
 
-1. SITE OVERVIEW (5 Core Pages)
+1. SITE OVERVIEW (9 Core Pages)
 --------------------------------------------------------------------------------
-- index.html     -> Home page (Portrait, credibility stats, how I can help,
-                    short bio, Growth Karo feature, Fraud Buster tips,
-                    testimonials, final CTA).
-- about.html     -> Full story, Sirsa background, milestones, education (IGNOU),
-                    values, and volunteering openness.
-- services.html  -> Work With Me: Career Coaching, Personal Branding, Growth Karo
-                    business consulting, Cyber Security advisory, 3-step process, FAQs.
-- awareness.html -> Fraud Awareness & Cyber Safety Guide: Common scams, warning
-                    signs, emergency action plan, and official 1930 / cybercrime.gov.in details.
-- contact.html   -> Direct contact page: responsive 2-column layout, WhatsApp,
-                    LinkedIn, email cards, and WhatsApp-integrated inquiry form.
-- work.html      -> Instant redirect to services.html.
+- index.html               -> Homepage (Hero, portfolio showcase preview, services,
+                              journey since 2019, digital safety mission, quick booking).
+- portfolio.html           -> Dedicated Portfolio Page (Web development platforms,
+                              AI video studio showcase, Google My Business local setups).
+- web-development.html     -> Commercial Service Landing: High-Performance Web Dev.
+- gmb-setup.html           -> Commercial Service Landing: Google My Business Setup.
+- ai-video-production.html -> Commercial Service Landing: Next-Gen AI Video Studio.
+- digital-safety.html      -> Community Mission: Cyber fraud triage & safety guides
+                              (870+ cases, 700+ MLM traps, 100+ malware cleanups).
+- about.html               -> Full story, Gurugram 2019 beginnings, career evolution.
+- services.html            -> Services overview, delivery philosophy, FAQs.
+- contact.html             -> Direct contact page: WhatsApp, Calendly, email.
 
 2. HOW TO UPDATE YOUR DETAILS
 --------------------------------------------------------------------------------
-All your personal contact information and links are centralized in config.js!
+All personal contact information and links are centralized in config.js!
 Open "config.js" to edit:
   - name        : Surender Verma
   - location    : Sirsa, Haryana, India
   - email       : Bizsocialsurender@gmail.com
   - whatsapp    : 919817242747 (Display: +91 98172 42747)
   - linkedin    : https://linkedin.com/in/Socialsurender (@Socialsurender)
-  - growthKaro  : https://growthkaro.com
-  - stats       : Followers (11,700+), Connections (500+), Stories (100+)
+  - stats       : mlmFraud (700+), malwareCleanup (100+), moneyFraud (70+)
 
-3. HOW TO ADD OR REPLACE YOUR PORTRAIT PHOTO
+3. HOW TO REPLACE PHOTOS
 --------------------------------------------------------------------------------
-1. Place your real photo inside the "images" folder.
-2. Name the file: "surender.jpg" (recommended aspect ratio 4:5 or 840x1008px).
-3. The website will immediately load your picture in the hero section!
-   (An executive default and vector placeholder "surender-placeholder.svg" are
-   already included and will automatically display if your photo is ever moved).
+1. Main Hero photo: "images/surender-blue.jpg"
+2. Profile avatar: "images/surender.jpg"
+3. Journey artwork: "images/my-story-artwork.jpg"
+Replace these files inside the "images" folder with your own photos keeping
+the same names.
 
-4. SOCIAL SHARING (OPEN GRAPH & TWITTER)
+4. SOCIAL SHARING (OPEN GRAPH)
 --------------------------------------------------------------------------------
-- images/og-image.png (1200x630) is pre-configured across all pages so your link
-  previews look gorgeous on WhatsApp, LinkedIn, X/Twitter, and Facebook.
-- images/apple-touch-icon.png (180x180) is provided for iPhone and iPad home screens.
+- images/og-image.png (1200x630) is pre-configured across all pages for rich
+  link previews on WhatsApp, LinkedIn, X/Twitter, and Facebook.
+- images/apple-touch-icon.png (180x180) for iOS home screen bookmarks.
 
-5. HOW TO UPLOAD TO WEB HOSTING
+5. HOW TO UPLOAD TO HOSTING
 --------------------------------------------------------------------------------
-This website is 100% static (pure HTML, CSS, JavaScript) with ZERO build tools,
-zero node_modules, and zero npm commands needed!
-You can directly upload all files to:
-- Vercel (drag and drop the folder or connect via GitHub)
-- Netlify (drag and drop into Netlify Drop)
-- GitHub Pages (push code and enable Pages in repository settings)
-- Hostinger, GoDaddy, Namecheap, cPanel (upload all files to public_html)
+This website is 100% static (pure HTML, CSS, JavaScript) with ZERO build tools!
+Upload all files to:
+- Vercel, Netlify, Cloudflare Pages, GitHub Pages, or cPanel (public_html).
 
 ================================================================================
