@@ -313,7 +313,55 @@
     elements.forEach(el => observer.observe(el));
   }
 
-  // 5. Image Fallback Handling
+  // 5. Animated Number Counter for Credibility Stats
+  function setupStatCounters() {
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const statElements = $$('.stat-num');
+    if (!statElements.length || !('IntersectionObserver' in window)) return;
+
+    const animateCount = (el) => {
+      const rawText = el.textContent.trim();
+      const match = rawText.match(/^(\d+)(\+?)$/);
+      if (!match) return;
+
+      const target = parseInt(match[1], 10);
+      const suffix = match[2] || '';
+      const duration = 1400; // ms
+      const startTime = performance.now();
+
+      const update = (now) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(easeOut * target);
+
+        el.textContent = current + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = target + suffix;
+        }
+      };
+
+      requestAnimationFrame(update);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    statElements.forEach(el => observer.observe(el));
+  }
+
+  // 6. Image Fallback Handling
   function setupImageFallbacks() {
     $$('img.hero-portrait-img').forEach(img => {
       const handleFallback = () => {
@@ -459,6 +507,7 @@
     setupMobileNav();
     setupHeaderScroll();
     setupScrollReveal();
+    setupStatCounters();
     setupImageFallbacks();
     highlightCurrentPage();
     setupContactForm();
