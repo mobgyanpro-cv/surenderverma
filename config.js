@@ -35,6 +35,14 @@ const SITE = {
   instagram: 'https://instagram.com/social_surender',
   website: 'https://surenderverma.cv',
 
+  // Verified Cybersecurity Track Record
+  stats: {
+    mlmFraud: '700+',
+    malwareCleanup: '100+',
+    moneyFraud: '70+',
+    startYear: '2019'
+  },
+
   // Dynamic Year
   year: new Date().getFullYear()
 };

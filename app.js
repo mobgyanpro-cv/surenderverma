@@ -78,8 +78,14 @@
       if (SITE.stats.mlmFraud) {
         $$('[data-stat="mlmFraud"]').forEach(el => { el.textContent = SITE.stats.mlmFraud; });
       }
+      if (SITE.stats.malwareCleanup) {
+        $$('[data-stat="malwareCleanup"]').forEach(el => { el.textContent = SITE.stats.malwareCleanup; });
+      }
       if (SITE.stats.moneyFraud) {
         $$('[data-stat="moneyFraud"]').forEach(el => { el.textContent = SITE.stats.moneyFraud; });
+      }
+      if (SITE.stats.startYear) {
+        $$('[data-stat="startYear"]').forEach(el => { el.textContent = SITE.stats.startYear; });
       }
       if (SITE.stats.experience) {
         $$('[data-stat="experience"]').forEach(el => { el.textContent = SITE.stats.experience; });
